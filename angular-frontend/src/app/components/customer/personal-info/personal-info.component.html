@@ -1,0 +1,10 @@
+<h1>My Personal Information</h1>
+<form class="form" #customerForm="ngForm" (ngSubmit)="saveCustomerInfo()">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text">
+    <label for="lastname">Lastname</label>
+    <input id="lastname" name="lastname" type="text">
+    <label for="mail">Mail</label>
+    <input id="mail" name="mail" type="text">
+  <button type="submit">Submit</button>
+</form>

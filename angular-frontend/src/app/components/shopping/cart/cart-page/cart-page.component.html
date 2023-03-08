@@ -1,0 +1,99 @@
+<h1>Your Shopping Cart</h1>
+<!--<div class="cart-container">-->
+<!--  <table>-->
+<!--    <tr>-->
+<!--      <th>Image</th>-->
+<!--      <th>Product</th>-->
+<!--      <th>Quantité</th>-->
+<!--      <th>Total</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--&lt;!&ndash;    <tr *ngFor="let cartItem in cart.cartItems">&ndash;&gt;-->
+<!--      <td>-->
+<!--        <img src="assets/images/vesteexemple.jpg" alt="">-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <p>Nom Produit</p>-->
+<!--        <p>Prix Unitaire</p>-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <p>Incre</p>-->
+<!--        <p>5</p>-->
+<!--        <p>Decr</p>-->
+<!--        <p>Remove</p>-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <p>1000€</p>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--  </table>-->
+
+<div class="cart-container">
+  <table class="cart-table">
+    <tr>
+      <th>
+        <p>Product</p>
+      </th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+    <tr>
+      <td>
+        <div class="cart-prod-details">
+          <img src="assets/images/vesteexemple.jpg" alt="">
+          <div class="cart-texts">
+            <p>Nom Produit</p>
+            <small>Price: 50€</small>
+            <br>
+            <a href="">Remove</a>
+          </div>
+        </div>
+      </td>
+      <td>Quantity</td>
+      <td>200€</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="cart-prod-details">
+          <img src="assets/images/vesteexemple.jpg" alt="">
+          <div class="cart-texts">
+            <p>Nom Produit</p>
+            <small>Price: 50€</small>
+            <br>
+            <a href="">Remove</a>
+          </div>
+        </div>
+      </td>
+      <td>Quantity</td>
+      <td>200€</td>
+    </tr>
+    <tr class="horizontal-line">
+      <td></td>
+    </tr>
+    <div class="subtotal-details">
+      <h2>Subtotal</h2>
+      <h3>200€</h3>
+      <h2>Delivery fees</h2>
+      <h3>3.5€</h3>
+      <button><a [routerLink]="['/checkout']">Checkout</a></button>
+    </div>
+  </table>
+</div>
+<!--<div class="total-price">-->
+<!--  <table class="cart-table">-->
+<!--    <tr>-->
+<!--      <td>Subtotal</td>-->
+<!--      <td>200</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Delivery fees</td>-->
+<!--      <td>5.35€</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Total</td>-->
+<!--      <td>205.35€</td>-->
+<!--    </tr>-->
+<!--  </table>-->
+<!--  <button><a [routerLink]="['/checkout']">Checkout</a></button>-->
+
+

@@ -1,0 +1,10 @@
+ <form #categoryForm="ngForm" (ngSubmit)="saveCategory()">
+  <label for="name">Name</label>
+  <input id="name" name="name" placeholder="Enter Name" type="text" [(ngModel)]="category.name">
+   <label for="sizingType">Sizing Type</label>
+   <select id="sizingType" name="sizingType" [(ngModel)]="category.sizingType">
+     <option>Choose a clothing sizing type...</option>
+     <option *ngFor="let sizingType of sizingTypes" [ngValue]="sizingType">{{sizingType}}</option>
+   </select>
+  <button type="submit">Submit</button>
+</form>

@@ -1,0 +1,25 @@
+<button><a [routerLink]="['/create-product']">New Product</a></button>
+
+<table>
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Nom</th>
+    <th>Nom</th>
+    <th>Nom</th>
+    <th>Nom</th>
+    <th>Nom</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products">
+    <td>{{product.name}}</td>
+    <td>{{product.name}}</td>
+    <td>{{product.name}}</td>
+    <td>{{product.name}}</td>
+    <td><a [routerLink]="['/edit-product', product.productId]">Edit Product</a></td>
+    <td><a [routerLink]="['/edit-stock', product.productId]">Manage stock</a></td>
+  </tr>
+  </tbody>
+</table>
+

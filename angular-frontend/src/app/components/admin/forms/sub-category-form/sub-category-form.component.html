@@ -1,0 +1,8 @@
+<form #subCategoryForm="ngForm" (ngSubmit)="saveSubCategory()">
+  <label for="name">Name</label>
+  <input id="name" name="name" placeholder="Enter Name" type="text" [(ngModel)]="subCategory.name">
+  <select name="category" [(ngModel)]="subCategory.category" [value]="currentCategory">
+    <option *ngFor="let category of categoryList" [ngValue]="subCategory.category">{{category.name}}</option>
+  </select>
+  <button type="submit">Submit</button>
+</form>

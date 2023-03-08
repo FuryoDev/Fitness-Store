@@ -1,0 +1,13 @@
+<button><a [routerLink]="['/create-subcategory', categoryId]">Create</a></button>
+<div class="admin-container">
+  <div class="admin-card" *ngFor="let subCategory of subCategories">
+    <a [routerLink]="['/admin-products-by-subcategory', subCategory.subCategoryId]">
+      <img class="admin-card-img" src="assets/images/subcat-ex.jpg" alt="">
+      <p class="admin-card-title">{{subCategory.name}}</p>
+      <button>
+        <a [routerLink]="['/edit-subcategory', subCategory.subCategoryId]">Edit</a>
+      </button>
+    </a>
+  </div>
+</div>
+

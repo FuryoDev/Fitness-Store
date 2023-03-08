@@ -1,0 +1,13 @@
+<form class="form prod-form" #productForm="ngForm" (ngSubmit)="saveProduct()">
+  <label for="name">Name</label>
+  <input id="name" name="name" type="text" [(ngModel)]="product.name">
+  <label for="subCategory">Type of product</label>
+  <select id="subCategory" name="subCategory" [(ngModel)]="product.subCategory">
+    <option *ngFor="let subCategory of subCategoryList" [ngValue]="subCategory">{{subCategory.name}}</option>
+  </select>
+  <label for="price">Price</label>
+  <input type="number" id="price" name="price" [(ngModel)]="product.price">
+  <label for="description">Description</label>
+  <input id="description" name="description" type="text" class="description" [(ngModel)]="product.description">
+  <button type="submit">Submit</button>
+</form>

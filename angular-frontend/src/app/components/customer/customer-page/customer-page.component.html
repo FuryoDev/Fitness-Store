@@ -1,0 +1,16 @@
+<div class="customer-page">
+  <div class="customer-options">
+    <ul>
+      <li>
+        <button (click)="togglePersonal()">Personal Informations</button>
+      </li>
+      <li>
+        <button (click)="toggleOrders()">Checks Orders</button>
+      </li>
+    </ul>
+  </div>
+  <div class="components-container">
+    <app-personal-info [hidden]="!isPersonalActive"></app-personal-info>
+    <app-customer-orders [hidden]="!isOrdersActive"></app-customer-orders>
+  </div>
+</div>
