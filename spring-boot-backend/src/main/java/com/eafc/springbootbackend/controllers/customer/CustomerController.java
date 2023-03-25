@@ -1,15 +1,20 @@
 package com.eafc.springbootbackend.controllers.customer;
 
-import com.eafc.springbootbackend.entities.customer.CustomerInfo;
+import com.eafc.springbootbackend.entities.customer.AccountInfo;
+import com.eafc.springbootbackend.services.customer.CustomerServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashSet;
-
 @RestController
 public class CustomerController {
+
+    private final CustomerServiceImpl customerService;
+
+    public CustomerController(CustomerServiceImpl customerService) {
+        this.customerService = customerService;
+    }
 
     @GetMapping("/login-page")
     public String login() {
@@ -17,9 +22,8 @@ public class CustomerController {
     }
 
     @PostMapping("/register-user")
-    public CustomerInfo createCustomerAccount(@RequestBody CustomerInfo newCustomer){
-        Set<UserRole> roles = new HashSet<>();
-        Role role = new Role():
+    public AccountInfo createCustomerAccount(@RequestBody AccountInfo newCustomer){
+        //TODO: Add the Authority logic here depending on the nature of the new account
+        return customerService.createCustomer(newCustomer);
     }
-
 }

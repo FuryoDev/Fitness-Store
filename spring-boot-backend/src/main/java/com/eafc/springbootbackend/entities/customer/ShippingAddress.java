@@ -19,5 +19,5 @@ public class ShippingAddress {
     private String city;
 
     @OneToOne
-    private CustomerInfo customer;
+    private AccountInfo customer;
 }

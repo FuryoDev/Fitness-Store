@@ -1,6 +1,6 @@
 package com.eafc.springbootbackend.services.shopping;
 
-import com.eafc.springbootbackend.entities.customer.CustomerInfo;
+import com.eafc.springbootbackend.entities.customer.AccountInfo;
 import com.eafc.springbootbackend.entities.shopping.OrderInfo;
 
 import java.util.Collection;
@@ -10,7 +10,7 @@ public interface OrderService {
 
     Optional<OrderInfo> findOrderById(int orderId);
 
-    Collection<OrderInfo> findOrdersByCustomer(CustomerInfo customer);
+    Collection<OrderInfo> findOrdersByCustomer(AccountInfo customer);
 
     void saveOrder(OrderInfo orderInfo);
 

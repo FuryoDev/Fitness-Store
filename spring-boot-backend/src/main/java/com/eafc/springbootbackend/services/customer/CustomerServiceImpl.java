@@ -1,31 +1,30 @@
 package com.eafc.springbootbackend.services.customer;
 
-import com.eafc.springbootbackend.entities.customer.CustomerInfo;
+import com.eafc.springbootbackend.entities.customer.AccountInfo;
 import com.eafc.springbootbackend.repositories.customer.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import com.eafc.springbootbackend.repositories.customer.RoleRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-public class CustomerServiceImpl implements UserDetailsService {
+public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    private final RoleRepository roleRepository;
+
+    public CustomerServiceImpl(CustomerRepository customerRepository, RoleRepository roleRepository) {
         this.customerRepository = customerRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<CustomerInfo> customer = customerRepository.findByUsername(username);
-        if(customer.isPresent()) {
-            throw new IllegalStateException("SOMETHING VERY WORONG");
+    public AccountInfo createCustomer(AccountInfo customer) {
+        AccountInfo accountInfo = this.customerRepository.findByUsername(customer.getUsername()).get();
+        System.out.println("Customer already exists");
+        try {
+            throw new Exception("User already exists my man");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return customer.get();
     }
 }

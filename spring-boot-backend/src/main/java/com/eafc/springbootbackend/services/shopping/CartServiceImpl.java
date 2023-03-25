@@ -1,17 +1,14 @@
 package com.eafc.springbootbackend.services.shopping;
 
-import com.eafc.springbootbackend.entities.customer.CustomerInfo;
-import com.eafc.springbootbackend.entities.product.ProductInfo;
+import com.eafc.springbootbackend.entities.customer.AccountInfo;
 import com.eafc.springbootbackend.entities.shopping.Cart;
 import com.eafc.springbootbackend.entities.shopping.CartItem;
 import com.eafc.springbootbackend.repositories.shopping.CartItemRepository;
 import com.eafc.springbootbackend.repositories.shopping.CartRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -31,12 +28,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Optional<Cart> findCartByCustomer(CustomerInfo customer) {
-        return cartRepository.findCartByCustomerInfo(customer);
+    public Optional<Cart> findCartByCustomer(AccountInfo customer) {
+        return cartRepository.findCartByAccountInfo(customer);
     }
 
     @Override
-    public void addCartItemToCart(CartItem cartItem, CustomerInfo customer) {
+    public void addCartItemToCart(CartItem cartItem, AccountInfo customer) {
         Optional<Cart> optionalCart = findCartByCustomer(customer);
         Cart cart;
         if (optionalCart.isPresent()) {
@@ -67,7 +64,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void removeCartItemFromCart(CartItem cartItem, CustomerInfo customer) {
+    public void removeCartItemFromCart(CartItem cartItem, AccountInfo customer) {
         //TODO: Clean this
         Optional<Cart> cart = findCartByCustomer(customer);
         if(cart.isPresent()) {

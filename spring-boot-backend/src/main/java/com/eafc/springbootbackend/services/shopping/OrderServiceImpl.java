@@ -1,9 +1,8 @@
 package com.eafc.springbootbackend.services.shopping;
 
-import com.eafc.springbootbackend.entities.customer.CustomerInfo;
+import com.eafc.springbootbackend.entities.customer.AccountInfo;
 import com.eafc.springbootbackend.entities.shopping.OrderInfo;
 import com.eafc.springbootbackend.repositories.shopping.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -24,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Collection<OrderInfo> findOrdersByCustomer(CustomerInfo customer) {
+    public Collection<OrderInfo> findOrdersByCustomer(AccountInfo customer) {
         return orderRepository.findOrdersByCustomer(customer);
     }
 

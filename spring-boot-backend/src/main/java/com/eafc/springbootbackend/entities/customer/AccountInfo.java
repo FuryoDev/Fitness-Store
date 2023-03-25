@@ -3,18 +3,17 @@ package com.eafc.springbootbackend.entities.customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 @Entity
 @Data
-public class CustomerInfo implements Serializable, UserDetails {
+public class AccountInfo implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int customerId;
@@ -33,16 +32,21 @@ public class CustomerInfo implements Serializable, UserDetails {
     @OneToOne
     private ShippingAddress shippingAddress;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = )
-    @JsonIgnore
-    private Set<UserRole> userRoles = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "account_roles",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Authority> set = new HashSet<>();
-        this.userRoles.forEach(userRole ->  {
-            set.add(new Authority(userRole.getRole().getRoleName)))
-        });
-     }
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for(Role role: roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
+    }
 
     @Override
     public String getPassword() {

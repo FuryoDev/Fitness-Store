@@ -1,6 +1,6 @@
 package com.eafc.springbootbackend.entities.shopping;
 
-import com.eafc.springbootbackend.entities.customer.CustomerInfo;
+import com.eafc.springbootbackend.entities.customer.AccountInfo;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,7 +20,7 @@ public class Cart {
 
     @OneToOne
     @JoinColumn(name = "customer")
-    private CustomerInfo customerInfo;
+    private AccountInfo accountInfo;
 
     @NotNull
     private double totalPrice;
