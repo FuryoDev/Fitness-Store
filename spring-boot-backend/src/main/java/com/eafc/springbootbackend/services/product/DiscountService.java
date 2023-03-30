@@ -7,12 +7,12 @@ import java.util.Optional;
 
 public interface DiscountService {
 
-    Optional<Discount> findDiscountById(int discountId);
+    Optional<Discount> findDiscountById(Long discountId);
     Collection<Discount> findActiveDiscounts();
 
     Collection<Discount> findAllDiscount();
 
     void saveDiscount(Discount discount);
 
-    void deleteDiscount(int discountId);
+    void deleteDiscount(Long discountId);
 }

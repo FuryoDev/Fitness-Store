@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface StockService {
 
-    Optional<Stock> findStockById(int stockId);
+    Optional<Stock> findStockById(Long stockId);
 
     Collection<Stock> findStocksByProduct(ProductInfo productInfo);
 
@@ -18,5 +18,5 @@ public interface StockService {
 
     void saveStock(Stock stock);
 
-    void deleteStock(int id);
+    void deleteStock(Long id);
 }

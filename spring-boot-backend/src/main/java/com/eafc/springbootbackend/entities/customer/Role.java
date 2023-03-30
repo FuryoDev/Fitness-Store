@@ -1,5 +1,6 @@
 package com.eafc.springbootbackend.entities.customer;
 
+import com.eafc.springbootbackend.utils.ERole;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,5 +13,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roleId;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private ERole name;
 }

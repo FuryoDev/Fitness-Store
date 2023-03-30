@@ -18,12 +18,12 @@ public class AdminSubCategoryController {
     }
 
     @GetMapping("getSubCategoryById")
-    public SubCategory getSubCategoryById(@RequestParam("subCatId") Integer subCategoryId) {
+    public SubCategory getSubCategoryById(@RequestParam("subCatId") Long subCategoryId) {
         return subCategoryService.findSubCategoryById(subCategoryId).get();
     }
 
     @GetMapping("getSubCategoriesByCategory")
-    public Collection<SubCategory> getSubCategoriesByCategory(@RequestParam("catId") Integer categoryId) {
+    public Collection<SubCategory> getSubCategoriesByCategory(@RequestParam("catId") Long categoryId) {
         return subCategoryService.findSubCategoriesByCategory(categoryId);
     }
 

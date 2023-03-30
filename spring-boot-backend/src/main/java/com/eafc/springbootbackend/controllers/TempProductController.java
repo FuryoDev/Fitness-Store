@@ -28,21 +28,21 @@ public class TempProductController {
     Collection<ProductInfo> allProducts() {
         Collection<ProductInfo> productInfoCollection = new ArrayList<>();
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductId(1);
+        productInfo.setProductId(1l);
         productInfo.setName("White Product");
 
         Discount discount = new Discount();
-        discount.setId(1);
+        discount.setDiscountId(1L);
         discount.setDiscountName("Summer Discount");
         discount.setActive(true);
         discount.setPercentage(70);
 
         Category category = new Category();
         category.setName("Apparel");
-        category.setCategoryId(1);
+        category.setCategoryId(1L);
 
         SubCategory subCategory = new SubCategory();
-        subCategory.setSubCategoryId(1);
+        subCategory.setSubCategoryId(1L);
         subCategory.setName("T-shirts");
         subCategory.setCategory(category);
 
@@ -57,40 +57,40 @@ public class TempProductController {
     }
 
     @GetMapping("/by-category")
-    Collection<ProductInfo> allProductsByCategory(@RequestParam("catId") Integer id) {
+    Collection<ProductInfo> allProductsByCategory(@RequestParam("catId") Long id) {
         Collection<ProductInfo> productInfoCollection = new ArrayList<>();
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductId(1);
+        productInfo.setProductId(1L);
         productInfo.setName("White Product");
 
         ProductInfo productInfo2 = new ProductInfo();
-        productInfo2.setProductId(2);
+        productInfo2.setProductId(2L);
         productInfo2.setName("Black Product");
 
         Discount discount = new Discount();
-        discount.setId(1);
+        discount.setDiscountId(1L);
         discount.setDiscountName("Summer Discount");
         discount.setActive(true);
         discount.setPercentage(70);
 
         Category category = new Category();
         category.setName("Apparel");
-        category.setCategoryId(1);
+        category.setCategoryId(1L);
 
         SubCategory subCategory = new SubCategory();
-        subCategory.setSubCategoryId(1);
+        subCategory.setSubCategoryId(1L);
         subCategory.setName("T-shirts");
         subCategory.setCategory(category);
 
         Stock stock = new Stock();
         stock.setProduct(productInfo);
-        stock.setStockId(1);
+        stock.setStockId(1L);
         stock.setSize("Small");
         stock.setMaxItems(444);
 
         Stock stock1 = new Stock();
         stock1.setProduct(productInfo);
-        stock1.setStockId(2);
+        stock1.setStockId(2L);
         stock1.setSize("Medium");
         stock1.setMaxItems(100);
 
@@ -111,13 +111,13 @@ public class TempProductController {
     }
 
     @GetMapping("product")
-    public ProductInfo getProduct(@RequestParam("prodId") Integer productId) {
+    public ProductInfo getProduct(@RequestParam("prodId") Long productId) {
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductId(1);
+        productInfo.setProductId(1L);
         productInfo.setName("White Product");
 
         ProductInfo productInfo2 = new ProductInfo();
-        productInfo2.setProductId(2);
+        productInfo2.setProductId(2L);
         productInfo2.setName("Black Product");
         CartItem cartItem = new CartItem();
         cartItem.setQuantity(1);
@@ -138,13 +138,13 @@ public class TempProductController {
     @GetMapping("oneStock")
     public Stock getAStock() {
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductId(1);
+        productInfo.setProductId(1L);
         productInfo.setName("Stocked Product");
 
         Collection<Stock> stockCollection = new ArrayList<>();
 
         Stock stock = new Stock();
-        stock.setStockId(1);
+        stock.setStockId(1L);
         stock.setSize("Small");
         stock.setMaxItems(444);
 
@@ -161,13 +161,13 @@ public class TempProductController {
         Category category2 = new Category();
         Category category3 = new Category();
 
-        category1.setCategoryId(1);
+        category1.setCategoryId(1L);
         category1.setName("Apparels");
 
-        category2.setCategoryId(2);
+        category2.setCategoryId(2L);
         category2.setName("Accessories");
 
-        category3.setCategoryId(3);
+        category3.setCategoryId(3L);
         category3.setName("Supplements");
 
         Collection<Category> categories = new ArrayList<>();
@@ -181,7 +181,7 @@ public class TempProductController {
     @PostMapping("category")
     public Category getCategory(@RequestBody ProductInfo product) {
         Category category1 = new Category();
-        category1.setCategoryId(1);
+        category1.setCategoryId(1L);
         category1.setName("Apparels");
         product.setName("NOUVEAU NOOOOOM");
         return category1;
@@ -196,21 +196,21 @@ public class TempProductController {
     }
 
     @GetMapping("subcategories")
-    public Collection<SubCategory> getSubCategories(@RequestParam("catId") Integer categoryId) {
+    public Collection<SubCategory> getSubCategories(@RequestParam("catId") Long categoryId) {
         if(categoryId != null) {
             Category category = new Category();
             category.setName("Apparel");
-            category.setCategoryId(1);
+            category.setCategoryId(1L);
 
             Collection<SubCategory> subCategories = new ArrayList<>();
 
             SubCategory subCategory = new SubCategory();
-            subCategory.setSubCategoryId(1);
+            subCategory.setSubCategoryId(1L);
             subCategory.setName("T-shirts");
             subCategory.setCategory(category);
 
             SubCategory subCategory1 = new SubCategory();
-            subCategory1.setSubCategoryId(2);
+            subCategory1.setSubCategoryId(2L);
             subCategory1.setName("Pantalons");
             subCategory1.setCategory(category);
 
@@ -223,13 +223,13 @@ public class TempProductController {
     }
 
     @GetMapping("by-subCategory")
-    public Collection<ProductInfo> getProducts(@RequestParam("subCatId") Integer id) {
+    public Collection<ProductInfo> getProducts(@RequestParam("subCatId") Long id) {
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductId(1);
+        productInfo.setProductId(1L);
         productInfo.setName("BBBBBBBBBBBBBB");
 
         ProductInfo productInfo2 = new ProductInfo();
-        productInfo2.setProductId(2);
+        productInfo2.setProductId(2L);
         productInfo2.setName("AAAAAAAAAAAAA");
         CartItem cartItem = new CartItem();
         cartItem.setQuantity(1);

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @Repository
-public interface StockRepository extends JpaRepository<Stock, Integer> {
+public interface StockRepository extends JpaRepository<Stock, Long> {
 
     Collection<Stock> findStocksByProduct(ProductInfo productInfo);
 }

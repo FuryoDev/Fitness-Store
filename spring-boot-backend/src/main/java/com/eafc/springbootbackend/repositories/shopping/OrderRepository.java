@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @Repository
-public interface OrderRepository extends JpaRepository<OrderInfo, Integer> {
+public interface OrderRepository extends JpaRepository<OrderInfo, Long> {
 
     Collection<OrderInfo> findOrdersByCustomer(AccountInfo customer);
 }

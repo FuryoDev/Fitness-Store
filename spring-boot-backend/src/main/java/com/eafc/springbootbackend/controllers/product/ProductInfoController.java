@@ -26,7 +26,7 @@ public class ProductInfoController {
     }
 
     @GetMapping("get-product")
-    private ProductInfo getProductById(Integer productId){
+    private ProductInfo getProductById(Long productId){
         return productService.findProductById(productId);
     }
 

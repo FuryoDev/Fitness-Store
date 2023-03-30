@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface SubCategoryService {
 
-    Optional<SubCategory> findSubCategoryById(int subCategoryId);
+    Optional<SubCategory> findSubCategoryById(Long subCategoryId);
 
-    Collection<SubCategory> findSubCategoriesByCategory(int categoryId);
+    Collection<SubCategory> findSubCategoriesByCategory(Long categoryId);
 
     Collection<SubCategory> findAllSubCategories();
 
     void saveSubCategory(SubCategory subCategory);
 
-    void deleteSubCategory(int subCategoryId);
+    void deleteSubCategory(Long subCategoryId);
 }

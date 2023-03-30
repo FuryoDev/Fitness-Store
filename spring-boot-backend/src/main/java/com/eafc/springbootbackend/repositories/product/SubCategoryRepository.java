@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @Repository
-public interface SubCategoryRepository extends JpaRepository<SubCategory, Integer> {
+public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> {
 
     Collection<SubCategory> findSubCategoriesByCategory(Category category);
 }

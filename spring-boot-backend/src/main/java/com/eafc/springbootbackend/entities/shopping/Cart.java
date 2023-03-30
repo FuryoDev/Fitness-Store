@@ -13,13 +13,13 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cartId;
+    private Long cartId;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private Collection<CartItem> cartItems;
 
     @OneToOne
-    @JoinColumn(name = "customer")
+    @JoinColumn(name = "relatedAccount")
     private AccountInfo accountInfo;
 
     @NotNull

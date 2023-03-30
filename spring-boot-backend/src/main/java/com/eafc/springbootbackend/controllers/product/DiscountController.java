@@ -19,7 +19,7 @@ public class DiscountController {
     }
 
     @GetMapping("getDiscountById")
-    public Discount getCategoryById(@RequestParam("id") Integer discountId) {
+    public Discount getCategoryById(@RequestParam("id") Long discountId) {
         return discountService.findDiscountById(discountId).get();
     }
 

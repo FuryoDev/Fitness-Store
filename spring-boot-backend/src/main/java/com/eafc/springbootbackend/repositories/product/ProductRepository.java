@@ -12,9 +12,9 @@ import java.util.Collection;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<ProductInfo, Integer> {
+public interface ProductRepository extends JpaRepository<ProductInfo, Long> {
 
-    ProductInfo findProductInfoByProductId(Integer productInfoId);
+    ProductInfo findProductInfoByProductId(Long productInfoId);
 
     Collection<ProductInfo> findProductsBySubCategory(SubCategory subCategory);
     @Query("SELECT p FROM ProductInfo p")

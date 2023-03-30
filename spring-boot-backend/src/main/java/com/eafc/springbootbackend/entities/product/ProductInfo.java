@@ -19,7 +19,7 @@ public class ProductInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int productId;
+    private Long productId;
 
     @NotNull
     @NotBlank

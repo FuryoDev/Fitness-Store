@@ -22,12 +22,12 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     }
 
     @Override
-    public Optional<SubCategory> findSubCategoryById(int subCategoryId) {
+    public Optional<SubCategory> findSubCategoryById(Long subCategoryId) {
         return subCategoryRepository.findById(subCategoryId);
     }
 
     @Override
-    public Collection<SubCategory> findSubCategoriesByCategory(int categoryId) {
+    public Collection<SubCategory> findSubCategoriesByCategory(Long categoryId) {
         Category category = categoryRepository.findById(categoryId).get();
         return subCategoryRepository.findSubCategoriesByCategory(category);
     }
@@ -43,7 +43,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     }
 
     @Override
-    public void deleteSubCategory(int subCategoryId) {
+    public void deleteSubCategory(Long subCategoryId) {
         subCategoryRepository.deleteById(subCategoryId);
     }
 }

@@ -10,7 +10,7 @@ public class ShippingAddress {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int shippingAddressId;
+    private Long shippingAddressId;
 
     private String address;
 

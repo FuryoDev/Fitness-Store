@@ -18,7 +18,7 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    public Optional<Discount> findDiscountById(int discountId) {
+    public Optional<Discount> findDiscountById(Long discountId) {
         return discountRepository.findById(discountId);
     }
 
@@ -39,7 +39,7 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    public void deleteDiscount(int discountId) {
+    public void deleteDiscount(Long discountId) {
         discountRepository.deleteById(discountId);
     }
 }

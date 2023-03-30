@@ -14,7 +14,7 @@ public class OrderInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderId;
+    private Long orderId;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private Collection<OrderItem> orderItems;

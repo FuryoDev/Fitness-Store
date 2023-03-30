@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface CartService {
 
-    Optional<Cart> findCartById(int cartId);
+    Optional<Cart> findCartById(Long cartId);
 
     Optional<Cart> findCartByCustomer(AccountInfo customer);
 

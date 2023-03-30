@@ -19,7 +19,7 @@ public class SubCategoryController {
     }
 
 //    @GetMapping("getSubCategoryById")
-    public SubCategory getSubCategoryById(@RequestParam("id") Integer subCategoryId) {
+    public SubCategory getSubCategoryById(@RequestParam("id") Long subCategoryId) {
         return subCategoryService.findSubCategoryById(subCategoryId).get();
     }
 

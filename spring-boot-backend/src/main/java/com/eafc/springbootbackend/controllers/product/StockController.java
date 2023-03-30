@@ -24,7 +24,7 @@ public class StockController {
     }
 
 //    @GetMapping("getStockById")
-    public Stock getStockById(@RequestParam("id") Integer stockId) {
+    public Stock getStockById(@RequestParam("id") Long stockId) {
         return stockService.findStockById(stockId).get();
     }
 
@@ -34,7 +34,7 @@ public class StockController {
     }
 
 //    @GetMapping("stocksByProduct")
-    public Collection<Stock> getStocksByProduct(@RequestParam("id") Integer productId) {
+    public Collection<Stock> getStocksByProduct(@RequestParam("id") Long productId) {
         //return stockService.findStocksByProduct(productId);
         return null;
     }

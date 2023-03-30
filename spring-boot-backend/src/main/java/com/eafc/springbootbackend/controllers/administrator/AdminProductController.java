@@ -17,7 +17,7 @@ public class AdminProductController {
     }
 
     @GetMapping("getProductById")
-    public ProductInfo getProductById(@RequestParam("id") Integer id) {
+    public ProductInfo getProductById(@RequestParam("id") Long id) {
         return productService.findProductById(id);
     }
 
@@ -32,7 +32,7 @@ public class AdminProductController {
     }
 
     @DeleteMapping("deleteProduct")
-    public void deleteProduct(@RequestParam("id") Integer id){
+    public void deleteProduct(@RequestParam("id") Long id){
         productService.deleteProduct(id);
     }
 }

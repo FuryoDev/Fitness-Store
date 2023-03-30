@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface ProductService {
 
-    ProductInfo findProductById(int productId);
+    ProductInfo findProductById(Long productId);
 
     Collection<ProductInfo> findProductsBySubCategory(SubCategory subCategory);
 
@@ -28,6 +28,6 @@ public interface ProductService {
 
     void saveProduct(ProductInfo productInfo);
 
-    void deleteProduct(int productId);
+    void deleteProduct(Long productId);
 
 }

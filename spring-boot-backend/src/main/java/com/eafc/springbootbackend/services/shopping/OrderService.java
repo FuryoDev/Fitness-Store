@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface OrderService {
 
-    Optional<OrderInfo> findOrderById(int orderId);
+    Optional<OrderInfo> findOrderById(Long orderId);
 
     Collection<OrderInfo> findOrdersByCustomer(AccountInfo customer);
 

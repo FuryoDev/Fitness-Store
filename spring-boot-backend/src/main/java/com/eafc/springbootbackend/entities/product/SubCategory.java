@@ -15,7 +15,7 @@ public class SubCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int subCategoryId;
+    private Long subCategoryId;
 
     @NotNull
     @NotBlank

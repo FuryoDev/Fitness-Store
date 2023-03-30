@@ -20,7 +20,7 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public Optional<Stock> findStockById(int stockId) {
+    public Optional<Stock> findStockById(Long stockId) {
         return stockRepository.findById(stockId);
     }
 
@@ -45,7 +45,7 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public void deleteStock(int id) {
+    public void deleteStock(Long id) {
 
     }
 }

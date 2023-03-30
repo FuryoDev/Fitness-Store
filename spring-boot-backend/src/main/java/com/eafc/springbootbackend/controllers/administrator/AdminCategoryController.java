@@ -17,7 +17,7 @@ public class AdminCategoryController {
     }
 
     @GetMapping("getCategoryById")
-    public Category getCategoryById(@RequestParam("catId") Integer categoryId) {
+    public Category getCategoryById(@RequestParam("catId") Long categoryId) {
         return categoryService.findCategoryById(categoryId).get();
     }
 

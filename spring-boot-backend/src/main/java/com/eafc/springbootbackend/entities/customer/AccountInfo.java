@@ -1,5 +1,6 @@
 package com.eafc.springbootbackend.entities.customer;
 
+import com.eafc.springbootbackend.entities.shopping.Cart;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +17,7 @@ import java.util.*;
 public class AccountInfo implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int customerId;
+    private Long customerId;
 
     private String name;
 
@@ -30,22 +31,21 @@ public class AccountInfo implements Serializable, UserDetails {
     private Calendar birthday;
 
     @OneToOne
+    private Cart cart;
+
+    @OneToOne
     private ShippingAddress shippingAddress;
 
-    @ManyToMany
-    @JoinTable(name = "account_roles",
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "account_roles",
             joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for(Role role: roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return authorities;
+        return null;
     }
 
     @Override

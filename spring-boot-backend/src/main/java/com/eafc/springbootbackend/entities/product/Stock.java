@@ -15,7 +15,7 @@ public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int stockId;
+    private Long stockId;
 
     @NotNull
     @NotBlank
