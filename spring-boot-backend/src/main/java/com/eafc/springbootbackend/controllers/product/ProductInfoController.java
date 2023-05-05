@@ -5,13 +5,13 @@ import com.eafc.springbootbackend.entities.product.ProductInfo;
 import com.eafc.springbootbackend.services.product.DiscountService;
 import com.eafc.springbootbackend.services.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
 @RestController
+@RequestMapping("/api")
+@CrossOrigin
 public class ProductInfoController {
 
     private final ProductService productService;
@@ -20,13 +20,23 @@ public class ProductInfoController {
         this.productService = productService;
     }
 
-    @GetMapping("/get-all-products")
+    @GetMapping("/getAllProducts")
     private Collection<ProductInfo> getAllProduct() {
         return productService.findAllProducts();
     }
 
+    @GetMapping("getProductsBySubCat")
+    public Collection<ProductInfo> getProductsBySubCategory(@RequestParam("subCatId") Long subCatId) {
+        return productService.findProductsBySubCategory(subCatId);
+    }
+
+    @GetMapping("getProductsByCategory")
+    public Collection<ProductInfo> getProductsByCategory(@RequestParam("catId") Long categoryId) {
+        return productService.findProductsByCategory(categoryId);
+    }
+
     @GetMapping("get-product")
-    private ProductInfo getProductById(Long productId){
+    private ProductInfo getProductById(@RequestParam("id") Long productId){
         return productService.findProductById(productId);
     }
 

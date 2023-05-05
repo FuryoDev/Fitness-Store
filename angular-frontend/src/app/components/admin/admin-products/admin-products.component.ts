@@ -34,6 +34,9 @@ export class AdminProductsComponent implements OnInit {
     this.productService.getProductsBySubCategory(this.subCategoryId).subscribe(
       data => {
         this.products = data;
+      },
+      error => {
+        console.log(error)
       }
     )
   }

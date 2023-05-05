@@ -8,21 +8,21 @@ import {Category} from "../../../common/prod-details/category";
 })
 export class CategoryService {
 
-  private baseUrl = 'http://localhost:6969/';
+  private baseUrl = 'http://localhost:6969/api/';
 
   constructor(private httpClient: HttpClient) {
 
   }
 
   getCategoryById(categoryId: number): Observable<Category> {
-    return this.httpClient.get<Category>(this.baseUrl +'getCategoryById?catId='+ categoryId)
+    return this.httpClient.get<Category>(this.baseUrl +'admin/getCategoryById?catId='+ categoryId)
   }
 
   getAllCategories(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(this.baseUrl + 'getAllCategories');
+    return this.httpClient.get<Category[]>(this.baseUrl + 'admin/getAllCategories');
   }
 
   saveCategory(category: Category) {
-    return this.httpClient.post(this.baseUrl +'saveCategory', category);
+    return this.httpClient.post(this.baseUrl +'admin/saveCategory', category);
   }
 }

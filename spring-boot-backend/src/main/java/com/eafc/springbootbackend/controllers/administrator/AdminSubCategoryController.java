@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@RequestMapping("/api/admin")
+@CrossOrigin
 public class AdminSubCategoryController {
 
     private final SubCategoryService subCategoryService;

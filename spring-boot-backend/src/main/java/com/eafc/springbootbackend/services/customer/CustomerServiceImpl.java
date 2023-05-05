@@ -27,4 +27,9 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public AccountInfo findByUsername(String username) {
+        return accountInfoRepository.findByUsername(username).get();
+    }
 }

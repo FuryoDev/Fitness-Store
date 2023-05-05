@@ -1,16 +1,22 @@
 <div class="header">
   <div class="logo">
-    <p>Logoo</p>
+    <a [routerLink]="['/home']"><p>Logoo</p>
+    </a>
   </div>
   <nav class="cat-links">
     <div class="cat-links-container">
-      <a [routerLink]="['products-showcase', category.categoryId]" *ngFor="let category of categories" href="">{{category.name}}</a>
-      <a [routerLink]="['/admin-dashboard']">Admin</a>
+      <a [routerLink]="['products-showcase', category.categoryId]" *ngFor="let category of categories"
+         href="">{{category.name}}</a>
+      <a *ngIf="isAdmin" [routerLink]="['/admin-dashboard']">Admin</a>
     </div>
   </nav>
   <div class="user-links">
-    <a [routerLink]="['/cart']"><fa-icon [icon]="faCart"></fa-icon></a>
-    <a [routerLink]="['/login-page']">Login</a>
-    <a [routerLink]="['/personal-page']"><fa-icon [icon]="faUser"></fa-icon></a>
+    <a [routerLink]="['/cart']">
+      <fa-icon [icon]="faCart"></fa-icon>
+    </a>
+    <a *ngIf="!isLoggedIn"[routerLink]="['/login-page']">Login</a>
+    <a *ngIf="isLoggedIn"[routerLink]="['/personal-page']">
+      <fa-icon [icon]="faUser"></fa-icon>
+    </a>
   </div>
 </div>

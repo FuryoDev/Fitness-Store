@@ -9,5 +9,7 @@
   <input type="number" id="price" name="price" [(ngModel)]="product.price">
   <label for="description">Description</label>
   <input id="description" name="description" type="text" class="description" [(ngModel)]="product.description">
+  <label for="image">Product Image:</label>
+  <input type="file" id="image" name="image" (change)="onImageSelected($event)">
   <button type="submit">Submit</button>
 </form>

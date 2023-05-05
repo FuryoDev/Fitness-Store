@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {TempoComponent} from './components/tempo/tempo.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ProductService} from "./services/product.service";
 import {HeaderComponent} from './components/navigation/header/header.component';
 import {FooterComponent} from './components/navigation/footer/footer.component';
@@ -33,6 +33,8 @@ import {CustomerOrdersComponent} from './components/customer/customer-orders/cus
 import {OrderPageComponent} from './components/customer/order-page/order-page.component';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {AdminStockComponent} from './components/admin/admin-stock/admin-stock.component';
+import {JwtInterceptor, JwtModule} from "@auth0/angular-jwt";
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -63,16 +65,24 @@ import {AdminStockComponent} from './components/admin/admin-stock/admin-stock.co
     PersonalInfoComponent,
     CustomerOrdersComponent,
     OrderPageComponent,
-    AdminStockComponent
+    AdminStockComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FontAwesomeModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('auth-token')
+      }
+    })
   ],
-  providers: [ProductService],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

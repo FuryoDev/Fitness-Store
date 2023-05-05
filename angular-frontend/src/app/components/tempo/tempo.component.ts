@@ -28,7 +28,4 @@ export class TempoComponent implements OnInit {
     )
   }
 
-  sendData(product: ProductInfo) {
-    this.productService.saveProduct(product).subscribe();
-  }
 }

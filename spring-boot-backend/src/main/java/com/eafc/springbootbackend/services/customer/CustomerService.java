@@ -6,4 +6,6 @@ public interface  CustomerService {
 
     AccountInfo createCustomer(AccountInfo customer);
 
+    AccountInfo findByUsername(String username);
+
 }

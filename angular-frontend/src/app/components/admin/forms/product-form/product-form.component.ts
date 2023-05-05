@@ -6,6 +6,7 @@ import {Stock} from "../../../../common/prod-details/stock";
 import {StockService} from "../../../../services/prod-details/stock.service";
 import {SubCategoryService} from "../../../../services/prod-details/subcategory/sub-category.service";
 import {SubCategory} from "../../../../common/prod-details/sub-category";
+import {ImageService} from "../../../../services/images/image.service";
 
 @Component({
   selector: 'app-product-form',
@@ -15,6 +16,9 @@ import {SubCategory} from "../../../../common/prod-details/sub-category";
 export class ProductFormComponent implements OnInit {
 
   product = new ProductInfo();
+  imageFile: File | null = null;
+  imageFolderPath: string = "assets/images/products/"
+
   subCategoryList: SubCategory[] = [];
 
   constructor(private route: ActivatedRoute,
@@ -33,10 +37,11 @@ export class ProductFormComponent implements OnInit {
     })
   }
 
+
   getProductData(hasProductId: boolean) {
     if(hasProductId) {
       const productId: number = +this.route.snapshot.paramMap.get('id')!;
-      this.productService.getProductById(productId).subscribe(
+      this.productService.getProductByIdAdmin(productId).subscribe(
         data => {
           this.product = data;
         }
@@ -52,6 +57,14 @@ export class ProductFormComponent implements OnInit {
         }
       )
     }
+    else {
+      const productId: number = +this.route.snapshot.paramMap.get('id')!;
+      this.productService.getProductByIdAdmin(productId).subscribe(
+        data => {
+          this.product = data;
+        }
+      )
+    }
 
     this.subCategoryService.getAllSubCategories().subscribe(
       data => {
@@ -61,8 +74,16 @@ export class ProductFormComponent implements OnInit {
   }
 
   saveProduct() {
-    this.productService.saveProduct(this.product).subscribe(
-      result => console.log(result)
-    );
+    let formData = new FormData();
+    formData.append('productInfo', new Blob([JSON.stringify(this.product)], {type: 'application/json' }) );
+    if (this.imageFile) {
+      formData.append('image', this.imageFile);
+    }
+    this.productService.saveProduct(formData);
+  }
+
+  onImageSelected(event: any) {
+    this.imageFile = event.target.files[0];
   }
 }
+

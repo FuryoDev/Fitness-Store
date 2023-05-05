@@ -17,7 +17,7 @@ public interface ProductRepository extends JpaRepository<ProductInfo, Long> {
     ProductInfo findProductInfoByProductId(Long productInfoId);
 
     Collection<ProductInfo> findProductsBySubCategory(SubCategory subCategory);
-    @Query("SELECT p FROM ProductInfo p")
+    @Query("SELECT p FROM ProductInfo p WHERE p.subCategory.category = :category")
     Collection<ProductInfo> findProductsByCategory(Category category);
 
     @Query("SELECT p from ProductInfo  p ORDER BY p.creationDate DESC")

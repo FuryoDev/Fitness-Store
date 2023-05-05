@@ -1,6 +1,5 @@
 package com.eafc.springbootbackend.services.product;
 
-import com.eafc.springbootbackend.entities.product.ProductInfo;
 import com.eafc.springbootbackend.entities.product.Stock;
 
 import java.util.Collection;
@@ -10,7 +9,7 @@ public interface StockService {
 
     Optional<Stock> findStockById(Long stockId);
 
-    Collection<Stock> findStocksByProduct(ProductInfo productInfo);
+    Collection<Stock> findStocksByProduct(Long productInfo);
 
     Collection<Stock> findAllStocks();
 

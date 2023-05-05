@@ -25,6 +25,7 @@ public class SubCategory {
     @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
     private Collection<ProductInfo> productInfos;
 
+    @JsonBackReference
     @NotNull
     @ManyToOne
     @JoinColumn(name = "category")

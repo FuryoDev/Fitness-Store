@@ -5,16 +5,14 @@ import com.eafc.springbootbackend.entities.product.Stock;
 import com.eafc.springbootbackend.services.product.ProductService;
 import com.eafc.springbootbackend.services.product.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@RequestMapping("/api")
+@CrossOrigin
 public class StockController {
 
     private final StockService stockService;
@@ -33,9 +31,8 @@ public class StockController {
         return stockService.findAllStocks();
     }
 
-//    @GetMapping("stocksByProduct")
-    public Collection<Stock> getStocksByProduct(@RequestParam("id") Long productId) {
-        //return stockService.findStocksByProduct(productId);
-        return null;
+    @GetMapping("stocksByProduct")
+    public Collection<Stock> getStocksByProduct(@RequestParam("productId") Long productId) {
+        return stockService.findStocksByProduct(productId);
     }
 }

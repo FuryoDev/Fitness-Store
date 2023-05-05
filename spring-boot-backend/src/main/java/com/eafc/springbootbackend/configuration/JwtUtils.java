@@ -26,8 +26,11 @@ public class JwtUtils {
     @Value("${moujib.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    public String generateJwtToken(Authentication authentication) {
+    public String generateJwtToken(Authentication authentication) throws Exception {
 
+        if(authentication == null) {
+            throw new Exception("AHHDHKLDHKLDHLKDHLKHDL");
+        }
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
 
         return Jwts.builder()

@@ -29,7 +29,8 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     @Override
     public Collection<SubCategory> findSubCategoriesByCategory(Long categoryId) {
         Category category = categoryRepository.findById(categoryId).get();
-        return subCategoryRepository.findSubCategoriesByCategory(category);
+        Collection<SubCategory> subCategoriesByCategory = subCategoryRepository.findSubCategoriesByCategory(category);
+        return subCategoriesByCategory;
     }
 
     @Override

@@ -6,17 +6,19 @@ import com.eafc.springbootbackend.repositories.product.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.Collection;
 import java.util.Optional;
 
 @Service
 public class StockServiceImpl implements StockService {
 
+    private final ProductService productService;
+
     private final StockRepository stockRepository;
 
-    public StockServiceImpl(StockRepository stockRepository) {
+    public StockServiceImpl(StockRepository stockRepository, ProductService productService) {
         this.stockRepository = stockRepository;
+        this.productService = productService;
     }
 
     @Override
@@ -25,7 +27,9 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public Collection<Stock> findStocksByProduct(ProductInfo productInfo) {
+    public Collection<Stock> findStocksByProduct(Long productId) {
+        ProductInfo productInfo = productService.findProductById(productId);
+        System.out.println("On passe ici pour le stock d'un prod");
         return stockRepository.findStocksByProduct(productInfo);
     }
 

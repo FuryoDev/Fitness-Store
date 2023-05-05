@@ -76,7 +76,7 @@ tbody tr td
 
 //FORM COMMON CSS
 
-.form
+form
   width: 50%
   height: 90vh
   display: flex
@@ -112,24 +112,65 @@ tbody tr td
 
 //ADMIN DASHBOARD COMMON CSS
 
-.admin-container
-  padding: 10px
+.cards-container
   display: flex
+  flex-wrap: wrap
   justify-content: space-around
+  padding: 10px
+
+
+.admin-card-link
+  text-decoration: none
+
 
 .admin-card
-  border: solid 1px black
-  height: 100px
-  width: 100px
+  position: relative
+  width: 300px
+  height: 200px
+  overflow: hidden
+  margin-bottom: 20px
+
 
 .admin-card-img
   position: absolute
-  width: 10%
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  object-fit: cover
+
 
 .admin-card-title
-  color: white
-  font-size: 20px
+  position: absolute
   top: 50%
   left: 50%
-  position: relative
+  transform: translate(-50%, -50%)
+  color: #fff
   text-align: center
+  width: 100%
+  padding: 10px
+  background-color: rgba(0, 0, 0, 0.5)
+  text-shadow: 1px 1px 1px #000
+  margin: 0
+
+
+.admin-card-btn-container
+  position: absolute
+  top: 10px
+  right: 10px
+
+
+.admin-card-btn
+  display: inline-block
+  padding: 12px 16px
+  background-color: #333
+  color: #fff
+  border-radius: 30px
+  margin-left: 10px
+  z-index: 1
+  position: relative
+
+
+.admin-card-btn.edit-btn
+  margin-right: 10px
+

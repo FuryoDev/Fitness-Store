@@ -1,8 +1,11 @@
 package com.eafc.springbootbackend;
 
+import lombok.Data;
+
 import java.util.List;
 
-public class JwtResponse {
+@Data
+public class JwtResponse  {
 
     private String token;
     private String type = "Bearer";

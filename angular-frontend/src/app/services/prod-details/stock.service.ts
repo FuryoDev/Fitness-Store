@@ -8,11 +8,11 @@ import {Stock} from "../../common/prod-details/stock";
 })
 export class StockService {
 
-  private baseUrl = 'http://localhost:6969/';
+  private baseUrl = 'http://localhost:6969/api/';
 
   constructor(private httpClient: HttpClient) { }
 
   findStockByProduct(productId: number): Observable<Stock[]> {
-    return this.httpClient.get<Stock[]>(this.baseUrl + 'stocksByProduct?id='+ productId);
+    return this.httpClient.get<Stock[]>(this.baseUrl + 'stocksByProduct?productId='+ productId);
   }
 }

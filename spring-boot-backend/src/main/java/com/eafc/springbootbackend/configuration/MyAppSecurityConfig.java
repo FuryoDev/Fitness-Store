@@ -66,20 +66,21 @@ public class MyAppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .csrf()
                 .disable()
-                .cors()
-                .disable()
                 .authorizeRequests()
-                .antMatchers("/generate-token", "/user/").permitAll()
-                .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/customer/**").hasAnyRole("CUSTOMER", "ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/**", "/generate-token").permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
     }
+
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ProductInfo} from "../common/shopping/product-info";
 import {map} from 'rxjs/operators'
@@ -11,7 +11,7 @@ import {Stock} from "../common/prod-details/stock";
 })
 export class ProductService {
 
-  private baseUrl = 'http://localhost:6969/';
+  private baseUrl = 'http://localhost:6969/api/';
 
   constructor(private httpClient: HttpClient) {
   }
@@ -26,24 +26,33 @@ export class ProductService {
 
   //TODO: Add a parameter here
   getProductsByCategory(categoryId: number) {
-    return this.httpClient.get<ProductInfo[]>(this.baseUrl + 'by-category?catId=' + categoryId)
+    return this.httpClient.get<ProductInfo[]>(this.baseUrl + 'getProductsByCategory?catId=' + categoryId)
   }
 
   getProductsBySubCategory(subCategoryId: number) {
-    // return this.httpClient.get<ProductInfo[]>(this.baseUrl + 'by-subCategory?subCatId='+ subCategoryId)
-    return this.httpClient.get<ProductInfo[]>(this.baseUrl + 'getAllProducts')
+    return this.httpClient.get<ProductInfo[]>(this.baseUrl + 'admin/getProductsBySubCategory?subCatId='+ subCategoryId)
+  }
+
+  getProductsBySubCat(subCategoryId: number) {
+    return this.httpClient.get<ProductInfo[]>(this.baseUrl + 'getProductsBySubCat?subCatId='+ subCategoryId)
   }
 
   getProductById(productId: number) {
-    return this.httpClient.get<ProductInfo>(this.baseUrl + 'getProductById?id=' + productId)
+    return this.httpClient.get<ProductInfo>(this.baseUrl + 'get-product?id=' + productId)
   }
 
-  saveProduct(product: ProductInfo) {
-    return this.httpClient.post(this.baseUrl + 'saveProduct', product);
+  getProductByIdAdmin(productId: number) {
+    return this.httpClient.get<ProductInfo>(this.baseUrl + 'admin/getProductById?id=' + productId)
+  }
+
+  saveProduct(productFormData: FormData) {
+    return this.httpClient.post(this.baseUrl + 'admin/saveProduct', productFormData).subscribe(
+      value => console.log(value),
+      error => console.log(error));
   }
 
   deleteProduct(productId: number) {
-    return this.httpClient.delete(this.baseUrl + 'deleteProduct?i='+ productId);
+    return this.httpClient.delete(this.baseUrl + 'admin/deleteProduct?i='+ productId);
   }
 }
 

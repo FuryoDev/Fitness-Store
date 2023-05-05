@@ -13,19 +13,16 @@
         <button class="round-button" (click)="decrement()">-</button>
       </div>
       <div class="size-buttons">
-        <button class="product-btn">Small</button>
-        <button class="product-btn">Medium</button>
-        <button class="product-btn">Large</button>
-        <button class="product-btn">X-Large</button>
+        <button *ngFor="let size of stocks"  class="product-btn">{{size.size}}</button>
       </div>
 
     </div>
-    <button class="add-to-cart-btn"><span>Add to cart</span></button>
+    <button class="add-to-cart-btn" (click)="addToCart()"><span>Add to cart</span></button>
     <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad adipisci
       aliquid atque autem blanditiis consequuntur delectus eius explicabo impedit inventore ipsa, maiores molestiae,
       mollitia numquam optio perspiciatis, tempora ut.</p>
   </div>
   <div class="image-container">
-    <img src="assets/images/vesteexemple.jpg" class="product-image">
+    <img [src]="productInfo.imageURL" class="product-image">
   </div>
 </div>

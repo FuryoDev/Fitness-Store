@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ProductInfo} from "../../../../common/shopping/product-info";
 import {ProductService} from "../../../../services/product.service";
 import {ActivatedRoute} from "@angular/router";
+import {SubCategory} from "../../../../common/prod-details/sub-category";
 
 @Component({
   selector: 'app-product-by-category',
@@ -10,8 +11,9 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ProductByCategoryComponent implements OnInit {
 
+  selectedSubCategories: SubCategory[] = [];
 
-  products: ProductInfo[] = [];
+  @Input() products: ProductInfo[] = [];
   currentCategoryId: number = 1;
 
   constructor(private route: ActivatedRoute,
@@ -21,6 +23,28 @@ export class ProductByCategoryComponent implements OnInit {
     this.route.paramMap.subscribe(() => {
       this.productsByCategories();
     });
+  }
+
+  onCheckedFilter($event: any) {
+    let index = this.selectedSubCategories.indexOf($event);
+    if(index === -1) {
+      this.selectedSubCategories.push($event);
+    }
+    else {
+      this.selectedSubCategories.splice(index, 1);
+    }
+    this.products = this.products.filter(
+      product => {
+        return this.selectedSubCategories.some(subCategory =>
+          subCategory.subCategoryId === product.subCategory.subCategoryId
+        )}
+    )
+
+    //TODO: Extract the rest of the code in its own method
+
+    if(this.selectedSubCategories.length < 1) {
+      this.productsByCategories();
+    }
   }
 
   productsByCategories() {
@@ -33,17 +57,10 @@ export class ProductByCategoryComponent implements OnInit {
       this.currentCategoryId = 1000;
     }
     console.log(this.currentCategoryId);
-
-    // this.productService.getProductsByCategory(this.currentCategoryId).subscribe(
-    //   data => {
-    //     this.products = data;
-    //   }
-    // )
-    this.productService.getProductsBySubCategory(1).subscribe(
+    this.productService.getProductsByCategory(this.currentCategoryId).subscribe(
       data => {
         this.products = data;
       }
     )
   }
-
 }

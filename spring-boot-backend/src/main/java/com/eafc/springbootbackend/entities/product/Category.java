@@ -22,8 +22,8 @@ public class Category {
     @NotBlank
     private String name;
 
-    @JsonBackReference
     @OneToMany(mappedBy = "category")
+    @JsonManagedReference
     private Collection<SubCategory> subCategories;
 
     private String sizingType;

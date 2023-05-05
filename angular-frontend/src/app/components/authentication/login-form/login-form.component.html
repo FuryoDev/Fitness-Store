@@ -1,1 +1,21 @@
-<p>login-form works!</p>
+<div class="background">
+  <form #loginForm="ngForm" (ngSubmit)="logIn()">
+    <h1>Log in to your account</h1>
+    <div class="form-group">
+      <label for="usernameOrEmail">Username or Email:</label>
+      <input type="text" class="form-control" id="usernameOrEmail" name="usernameOrEmail"
+             [(ngModel)]="loginData.username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password" name="password"
+             [(ngModel)]="loginData.password" required>
+    </div>
+    <!--  <div class="alert alert-danger" *ngIf="errorMessage">-->
+    <!--    {{ errorMessage }}-->
+    <!--  </div>-->
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+  <a [routerLink]="['/register-page']">Don't have an account? Register</a>
+</div>
+

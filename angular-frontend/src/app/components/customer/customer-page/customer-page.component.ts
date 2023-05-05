@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TokenStorageService} from "../../../services/authentication/token-storage.service";
 
 @Component({
   selector: 'app-customer-page',
@@ -10,7 +11,7 @@ export class CustomerPageComponent implements OnInit {
   isPersonalActive: boolean = true;
   isOrdersActive: boolean = false;
 
-  constructor() { }
+  constructor(private tokenStorageService : TokenStorageService) { }
 
   ngOnInit(): void {
     this.isPersonalActive = true;
@@ -25,6 +26,11 @@ export class CustomerPageComponent implements OnInit {
   toggleOrders() {
     this.isPersonalActive = false;
     this.isOrdersActive = true;
+  }
+
+  logout() {
+    this.tokenStorageService.signOut();
+    window.location.reload();
   }
 
 }

@@ -13,9 +13,9 @@ public interface CartService {
 
     Optional<Cart> findCartByCustomer(AccountInfo customer);
 
-    void addCartItemToCart(CartItem cartItem, AccountInfo customer);
+    void addCartItemToCart(CartItem cartItem, String customer);
 
-    Optional<CartItem> findItemInCart(Collection<CartItem> itemsInCart, CartItem newCartItem);
+    CartItem findItemInCart(Collection<CartItem> itemsInCart, CartItem newCartItem);
 
     void removeCartItemFromCart(CartItem cartItem, AccountInfo customer);
     void emptyCart(Cart cart);

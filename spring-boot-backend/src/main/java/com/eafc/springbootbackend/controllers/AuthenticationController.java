@@ -7,10 +7,15 @@ import com.eafc.springbootbackend.SignUpRequest;
 import com.eafc.springbootbackend.configuration.JwtUtils;
 import com.eafc.springbootbackend.entities.customer.AccountInfo;
 import com.eafc.springbootbackend.entities.customer.Role;
+import com.eafc.springbootbackend.entities.shopping.Cart;
 import com.eafc.springbootbackend.repositories.customer.RoleRepository;
+import com.eafc.springbootbackend.repositories.shopping.CartRepository;
 import com.eafc.springbootbackend.services.customer.UserDetailsServiceImpl;
+import com.eafc.springbootbackend.services.shopping.CartService;
 import com.eafc.springbootbackend.utils.ERole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,9 +25,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -31,6 +34,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/api")
+@CrossOrigin
 public class AuthenticationController {
 
     @Autowired
@@ -41,6 +46,9 @@ public class AuthenticationController {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private CartService cartService;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -58,19 +66,21 @@ public class AuthenticationController {
         }
     }
 
-    @PostMapping("/signIn")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody SignInRequest signInRequest) {
+    @PostMapping(value = "/signIn", produces = "application/json")
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody SignInRequest signInRequest) throws Exception {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signInRequest.getUsername(), signInRequest.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken((Authentication) authentication.getDetails());
+        String jwt = jwtUtils.generateJwtToken(authentication);
 
         AccountInfo accountInfo = (AccountInfo) authentication.getPrincipal();
         List<String> roles = accountInfo.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(new JwtResponse(jwt,accountInfo.getCustomerId(), accountInfo.getUsername(), accountInfo.getEmail(), roles));
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new JwtResponse(jwt,accountInfo.getCustomerId(), accountInfo.getUsername(), accountInfo.getEmail(), roles));
 
     }
 
@@ -92,38 +102,41 @@ public class AuthenticationController {
         AccountInfo user = new AccountInfo();
         user.setEmail(signUpRequest.getEmail());
         user.setUsername(signUpRequest.getUsername());
+        user.setPassword(encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_CUSTOMER)
+            Role userRole = roleRepository.findByName(ERole.CUSTOMER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                    case "admin" -> {
+                        Role adminRole = roleRepository.findByName(ERole.ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
-
-                        break;
-                    case "mod":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+                    }
+                    case "mod" -> {
+                        Role modRole = roleRepository.findByName(ERole.MODERATOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
-
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_CUSTOMER)
+                    }
+                    default -> {
+                        Role userRole = roleRepository.findByName(ERole.CUSTOMER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
+                    }
                 }
             });
         }
 
         user.setRoles(roles);
+        Cart newCart = new Cart();
+        newCart.setAccountInfo(user);
+        cartService.saveCart(newCart);
         userDetailsService.saveAccount(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

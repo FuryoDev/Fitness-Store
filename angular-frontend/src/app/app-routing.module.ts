@@ -15,6 +15,7 @@ import {RegisterFormComponent} from "./components/authentication/register-form/r
 import {CheckoutPageComponent} from "./components/shopping/checkout-page/checkout-page.component";
 import {OrderPageComponent} from "./components/customer/order-page/order-page.component";
 import {AdminStockComponent} from "./components/admin/admin-stock/admin-stock.component";
+import {HomeComponent} from "./components/home/home.component";
 
 const routes: Routes = [
   {
@@ -50,7 +51,7 @@ const routes: Routes = [
     component: SubCategoryFormComponent
   },
   {
-    path: 'create-product',
+    path: 'create-product/:subCatId',
     component: ProductFormComponent
   },
   {
@@ -70,7 +71,7 @@ const routes: Routes = [
     component: LoginFormComponent
   },
   {
-    path: 'register',
+    path: 'register-page',
     component: RegisterFormComponent
   },
   {
@@ -90,8 +91,20 @@ const routes: Routes = [
     component: CustomerPageComponent
   },
   {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'index',
+    component: HomeComponent
+  },
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
     path: '**',
-    redirectTo: 'admin',
+    redirectTo: 'index',
     pathMatch: "full"
   }
 ];
