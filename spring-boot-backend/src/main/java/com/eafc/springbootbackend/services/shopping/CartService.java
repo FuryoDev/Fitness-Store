@@ -1,6 +1,7 @@
 package com.eafc.springbootbackend.services.shopping;
 
 import com.eafc.springbootbackend.entities.customer.AccountInfo;
+import com.eafc.springbootbackend.entities.product.Stock;
 import com.eafc.springbootbackend.entities.shopping.Cart;
 import com.eafc.springbootbackend.entities.shopping.CartItem;
 
@@ -13,7 +14,7 @@ public interface CartService {
 
     Optional<Cart> findCartByCustomer(AccountInfo customer);
 
-    void addCartItemToCart(CartItem cartItem, String customer);
+    void addCartItemToCart(CartItem cartItem, String customerUsername);
 
     CartItem findItemInCart(Collection<CartItem> itemsInCart, CartItem newCartItem);
 

@@ -1,11 +1,21 @@
-<h1 class="showcase-title">Men Apparel</h1>
-<div class="showcase-container">
-  <app-sub-category-filter (filters)="onCheckedFilter($event)" class="filters-container"></app-sub-category-filter>
-  <div class="products-container">
-    <app-product-card class="card-container" *ngFor="let product of products"
-                      [routerLink]="['/product-page', product.productId]"
-                      [productInfo]="product"></app-product-card>
+<div class="wrapper">
+  <h1 class="showcase-title">{{category.name}}</h1>
+  <div class="products-page">
+    <app-sub-category-filter (filters)="onCheckedFilter($event)" class="filters-container"></app-sub-category-filter>
+    <div class="" *ngIf="products.length == 0">
+      <p>Nothing to show</p>
+    </div>
+    <div *ngIf="products.length > 0">
+      <div class="showcase-container">
+        <div class="products-container">
+          <app-product-card *ngFor="let product of products"
+                            [routerLink]="['/product-page', product.productId]"
+                            [productInfo]="product"></app-product-card>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
 
 

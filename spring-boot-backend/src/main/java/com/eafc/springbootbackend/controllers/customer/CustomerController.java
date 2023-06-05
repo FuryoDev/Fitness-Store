@@ -5,7 +5,7 @@ import com.eafc.springbootbackend.services.customer.CustomerServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/customer")
+@RequestMapping("/api")
 @CrossOrigin
 public class CustomerController {
 
@@ -24,5 +24,9 @@ public class CustomerController {
     public AccountInfo createCustomerAccount(@RequestBody AccountInfo newCustomer){
         //TODO: Add the Authority logic here depending on the nature of the new account
         return customerService.createCustomer(newCustomer);
+    }
+    @GetMapping("retrieveAccountInfo")
+    public AccountInfo retrieveAccountInfo(@RequestParam String username) {
+        return this.customerService.findByUsername(username);
     }
 }

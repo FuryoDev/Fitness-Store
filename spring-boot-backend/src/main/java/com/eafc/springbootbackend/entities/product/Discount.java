@@ -22,6 +22,7 @@ public class Discount {
     private int percentage;
     private boolean isActive;
 
-    @OneToMany(mappedBy = "discount")
-    private Collection<ProductInfo> discountedProducts;
+    @OneToMany
+    Collection<ProductInfo> productsInDiscount;
+
 }

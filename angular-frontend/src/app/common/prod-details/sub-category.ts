@@ -6,4 +6,5 @@ export class SubCategory {
   name!: string;
   productInfos!: ProductInfo[];
   category!: Category;
+  imageURL!: string;
 }

@@ -16,14 +16,16 @@ public interface ProductRepository extends JpaRepository<ProductInfo, Long> {
 
     ProductInfo findProductInfoByProductId(Long productInfoId);
 
+    boolean existsByName(String productName);
+
     Collection<ProductInfo> findProductsBySubCategory(SubCategory subCategory);
     @Query("SELECT p FROM ProductInfo p WHERE p.subCategory.category = :category")
     Collection<ProductInfo> findProductsByCategory(Category category);
 
     @Query("SELECT p from ProductInfo  p ORDER BY p.creationDate DESC")
     Collection<ProductInfo> findLatestProducts();
-    @Query("SELECT p from ProductInfo  p WHERE p.discount IS NOT NULL")
-    Collection<ProductInfo> findDiscountedProducts();
-    @Query("SELECT p from ProductInfo  p WHERE p.discount = :discount")
-    Collection<ProductInfo> findProductsByDiscount(Discount discount);
+//    @Query("SELECT p from ProductInfo  p WHERE p.discount IS NOT NULL")
+//    Collection<ProductInfo> findDiscountedProducts();
+//    @Query("SELECT p from ProductInfo  p WHERE p.discount = :discount")
+//    Collection<ProductInfo> findProductsByDiscount(Discount discount);
 }

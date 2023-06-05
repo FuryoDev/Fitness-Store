@@ -45,11 +45,6 @@
     border: solid 1.2px black
     cursor: pointer
 
-
-  &:focus
-    background-color: white
-    color: black
-
 .add-to-cart-btn
   transform: skew(-15deg)
   font-size: 14px
@@ -63,6 +58,8 @@
   width: 80%
   padding: 20px 20px
   margin-top: 20px
+  &:disabled
+    background-color: #cd9a9a
 
   span
     display: inline-block
@@ -87,6 +84,10 @@
   text-align: center
   height: 100%
   margin: auto
+
+.selected
+  background-color: white
+  color: black
 
 
 

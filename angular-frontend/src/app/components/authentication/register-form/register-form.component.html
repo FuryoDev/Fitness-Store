@@ -26,10 +26,13 @@
       <input type="text" class="form-control" id="lastName" name="lastName"
              [(ngModel)]="registerData.lastName" required>
     </div>
-    <!--  <div class="alert alert-danger" *ngIf="errorMessage">-->
-    <!--    {{ errorMessage }}-->
-    <!--  </div>-->
-    <button type="submit" class="btn btn-primary">Login</button>
+    <div class="form-group">
+      <input type="date" class="form-control" id="birthdate" name="birthdate"
+             [(ngModel)]="registerData.birthDay" required>
+      <div *ngIf="!isDateValid()" class="invalid-feedback">
+        Please select a date before the current date.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
   </form>
-
 </div>

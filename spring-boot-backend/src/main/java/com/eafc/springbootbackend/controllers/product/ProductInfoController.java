@@ -44,8 +44,8 @@ public class ProductInfoController {
     private Collection<ProductInfo> getLatestProducts() {
         return productService.findLatestProducts();
     }
-    @GetMapping("get-discounted-products")
-    private Collection<ProductInfo> getDiscountedProducts() {
-        return  productService.findDiscountedProducts();
-    }
+//    @GetMapping("get-discounted-products")
+//    private Collection<ProductInfo> getDiscountedProducts() {
+//        return  productService.findDiscountedProducts();
+//    }
 }

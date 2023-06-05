@@ -7,4 +7,5 @@ export class Category {
   public name!: string;
   public sizingType!: string;
   public subCategories!: SubCategory[];
+  imageURL!: string;
 }

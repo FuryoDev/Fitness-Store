@@ -1,6 +1,10 @@
 <div class="s-product-card">
-  <img [src]="productInfo.imageURL" class="s-product-card-img">
+  <div class="s-product-card-img-wrapper">
+    <img [src]="productInfo.imageURL" class="s-product-card-img">
+  </div>
   <p class="s-product-card-title">{{productInfo.name}}</p>
-  <p class="s-product-card-price">500 €</p>
+  <hr>
+  <p class="s-product-card-sex">{{productInfo.sex}}</p>
+  <p class="s-product-card-price">{{productInfo.price}} €</p>
+  <p class="s-product-card-button">Check Product</p>
 </div>
-

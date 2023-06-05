@@ -1,7 +1,9 @@
+import {AccountInfo} from "../users/account-info";
+import {CartItem} from "./cart-item";
+
 export class Cart {
   cartId!: number;
-  cartItems!: Cart[];
+  cartItems!: CartItem[];
   totalPrice!: number;
-  // customerInfo!: Customer;
-
+  accountInfo!: AccountInfo;
 }

@@ -8,6 +8,7 @@ import {Stock} from "../../../../common/prod-details/stock";
 import {StockService} from "../../../../services/prod-details/stock.service";
 import {UserService} from "../../../../services/authentication/user.service";
 import {TokenStorageService} from "../../../../services/authentication/token-storage.service";
+import {GuestCartService} from "../../../../services/shopping/cart/guest-cart.service";
 
 @Component({
   selector: 'app-product-page',
@@ -18,31 +19,36 @@ export class ProductPageComponent implements OnInit {
 
   productInfo: ProductInfo = new ProductInfo();
   cartItem!: CartItem;
-  currentProductId: number = 1;
+  currentProductId: number = 0;
   stocks!: Stock[];
+  isInStock: boolean = true;
+  errorMessage!: string;
 
 
   constructor(private route: ActivatedRoute,
               private productService: ProductService,
               private stockService: StockService,
               private cartService: CartService,
-              private tokenStorageService: TokenStorageService) {
+              private tokenStorageService: TokenStorageService,
+              private guestCartService: GuestCartService) {
   }
 
   async ngOnInit() {
     this.cartItem = new CartItem();
     this.cartItem.quantity = 1;
-    // use Promise.all() to wait for both getProductById() and getAStock() to complete
     await Promise.all([this.getProductById(), this.getAStock()]);
   }
 
   async getAStock() {
-    // wait for getProductById() to complete before accessing its data
     await this.getProductById();
 
-    if(this.productInfo !== null) {
+    if (this.productInfo !== null) {
       this.stockService.findStockByProduct(this.productInfo.productId).subscribe(data => {
-        this.stocks = data;
+        if (data.length == 1) {
+          this.cartItem.relatedSizeAndStock = data[0];
+        } else {
+          this.stocks = data;
+        }
       })
     }
   }
@@ -50,10 +56,9 @@ export class ProductPageComponent implements OnInit {
   async getProductById() {
     this.currentProductId = +this.route.snapshot.paramMap.get('prodId')!;
 
-    // set the productInfo value and wait for it to complete
     await this.productService.getProductById(this.currentProductId).toPromise().then(
       data => {
-        if(data != undefined)
+        if (data != undefined)
           this.productInfo = data;
       }
     );
@@ -61,19 +66,58 @@ export class ProductPageComponent implements OnInit {
 
 
   addToCart() {
-    let user = this.tokenStorageService.getUser();
-    //TODO: Check if enough in stock
     this.cartItem.productInfo = this.productInfo;
-    this.cartService.addToCart(this.cartItem).subscribe()
+    if (this.tokenStorageService.getUser() == undefined) {
+      this.addToCartTwo(this.cartItem);
+    } else {
+      this.cartService.addToCart(this.cartItem).subscribe()
+    }
   }
 
-  increment() {
-    this.cartItem.quantity++;
+  addToCartTwo(cartItem: CartItem) {
+    const existingCartItem = this.guestCartService.cartItems.find(item =>
+      item.productInfo.productId === cartItem.productInfo.productId && item.relatedSizeAndStock.stockId === cartItem.relatedSizeAndStock.stockId
+    );
+
+    if (existingCartItem) {
+      existingCartItem.quantity += cartItem.quantity;
+    } else {
+      this.guestCartService.cartItems.push(cartItem);
+    }
   }
 
-  decrement() {
-    this.cartItem.quantity--;
-    if (this.cartItem.quantity == 0)
-      this.cartItem.quantity = 1;
+  selectSize(size: any) {
+    this.cartItem.relatedSizeAndStock = size;
+  }
+
+  isSelectedSize(size: Stock): boolean {
+    return this.cartItem.relatedSizeAndStock === size;
+  }
+
+  isSizeSelected(): boolean {
+    return this.cartItem.relatedSizeAndStock !== undefined;
+  }
+
+  changeQty(value: number) {
+    if (this.cartItem.relatedSizeAndStock == undefined) {
+      this.errorMessage = 'Select a size first'
+      return;
+    } else {
+      const newValue = this.cartItem.quantity + value;
+      // Si la quantité voulue est plus grande que la quantité en stock, mettre le message d'error et ne pas incrément
+      if (newValue > this.cartItem.relatedSizeAndStock.itemsInStock) {
+        this.isInStock = false;
+        this.errorMessage = 'We don\'t have more than this quantity in stock';
+      } else {
+        this.isInStock = true;
+        if (newValue >= 1 && newValue <= 10) {
+          this.cartItem.quantity = newValue;
+        } else if (newValue < 1) {
+          this.cartItem.quantity = 1;
+        } else if (newValue > 10) {
+          this.cartItem.quantity = 10;
+        }
+      }
+    }
   }
 }

@@ -3,6 +3,8 @@ import {ProductInfo} from "../../../../common/shopping/product-info";
 import {ProductService} from "../../../../services/product.service";
 import {ActivatedRoute} from "@angular/router";
 import {SubCategory} from "../../../../common/prod-details/sub-category";
+import {CategoryService} from "../../../../services/prod-details/category/category.service";
+import {Category} from "../../../../common/prod-details/category";
 
 @Component({
   selector: 'app-product-by-category',
@@ -15,13 +17,16 @@ export class ProductByCategoryComponent implements OnInit {
 
   @Input() products: ProductInfo[] = [];
   currentCategoryId: number = 1;
+  category: Category = new Category();
 
   constructor(private route: ActivatedRoute,
-              private productService: ProductService) { }
+              private productService: ProductService,
+              private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
       this.productsByCategories();
+      this.retrieveCategory(this.currentCategoryId);
     });
   }
 
@@ -62,5 +67,15 @@ export class ProductByCategoryComponent implements OnInit {
         this.products = data;
       }
     )
+  }
+
+  protected readonly length = length;
+
+  private retrieveCategory(currentCategoryId: number) {
+    this.categoryService.getCategoryById(currentCategoryId).subscribe(
+      data => {
+        this.category = data;
+      }
+    );
   }
 }

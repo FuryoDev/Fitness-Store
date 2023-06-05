@@ -18,15 +18,15 @@ public interface ProductService {
 
     Collection<ProductInfo> findProductsByCategory(Long categoryId);
 
-    Collection<ProductInfo> findProductsByDiscount(Discount discount);
+//    Collection<ProductInfo> findProductsByDiscount(Discount discount);
 
     Collection<ProductInfo> findAllProducts();
 
     Collection<ProductInfo> findLatestProducts();
 
-    Collection<ProductInfo> findDiscountedProducts();
+//    Collection<ProductInfo> findDiscountedProducts();
 
-    ProductInfo createStockAndDate(ProductInfo newProduct);
+    void createStockAndDate(Long newProductId);
 
     void saveProduct(ProductInfo productInfo, MultipartFile image) throws IOException;
 

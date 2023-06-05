@@ -42,7 +42,7 @@ public class AdminProductController {
     }
 
     @DeleteMapping("deleteProduct")
-    public void deleteProduct(@RequestParam("id") Long id){
+    public void deleteProduct(@RequestParam("productId") Long id){
         productService.deleteProduct(id);
     }
 }

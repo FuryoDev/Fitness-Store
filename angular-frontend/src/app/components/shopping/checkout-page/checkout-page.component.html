@@ -1,1 +1,63 @@
-<p>checkout-page works!</p>
+  <div class="cart-section">
+    <h1>Validation de commande</h1>
+    <table class="cart-table">
+      <thead>
+      <tr>
+        <th>Produit</th>
+        <th>Size</th>
+        <th>Quantité</th>
+        <th>Prix total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cartItem of cartItems">
+        <td>{{cartItem.productInfo.name}}</td>
+        <td>{{cartItem.relatedSizeAndStock.size}}</td>
+        <td>
+          <span class="quantity">{{cartItem.quantity}}</span>
+        </td>
+        <td>{{cartItem.totalPrice}} €</td>
+      </tr>
+      </tbody>
+    </table>
+    <h2>Total: {{cart.totalPrice}} €</h2>
+  </div>
+
+  <div class="user-section">
+    <h2>Informations personnelles</h2>
+    <form [formGroup]="checkoutForm" (ngSubmit)="validateCheckout()" class="user-form">
+      <div class="form-group">
+        <label for="street">Street :</label>
+        <input type="text" id="street" name="street" formControlName="street" [(ngModel)]="shippingAddress.streetNameAndNumber" required>
+        <div *ngIf="street?.touched && street?.invalid" class="error-message">
+          <p style="color: red">Street and number is required.</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city"formControlName="city" [(ngModel)]="shippingAddress.city" required>
+        <div *ngIf="city?.touched && city?.invalid" class="error-message">
+          <p style="color: red">City is required.</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country"formControlName="country" [(ngModel)]="shippingAddress.country" required>
+        <div *ngIf="country?.touched && country?.invalid" class="error-message">
+          <p style="color: red">Country is required.</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <select name="paymentMethod" id="paymentMethod"formControlName="paymentMethod" [(ngModel)]="orderInfo.paymentMethod">
+          <option selected>Select a payment method</option>
+          <option *ngFor="let paymentMethod of paymentMethods" [ngValue]="paymentMethod">{{paymentMethod.name}}</option>
+          </select>
+        <div *ngIf="paymentMethod?.touched && paymentMethod?.invalid" class="error-message">
+          <p style="color: red">Payment Method is required.</p>
+        </div>
+      </div>
+      <button class="checkout-button" type="submit">Valider la commande</button>
+    </form>
+  </div>
+
+

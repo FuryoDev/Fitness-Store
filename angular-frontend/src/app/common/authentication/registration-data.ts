@@ -4,4 +4,5 @@ export class RegistrationData {
   email!: string;
   name!: string;
   lastName!: string;
+  birthDay!: Date;
 }

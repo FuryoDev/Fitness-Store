@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ProductByCategoryComponent} from "./components/shopping/showcase/product-by-category/product-by-category.component";
+import {
+  ProductByCategoryComponent
+} from "./components/shopping/showcase/product-by-category/product-by-category.component";
 import {CartPageComponent} from "./components/shopping/cart/cart-page/cart-page.component";
 import {CustomerPageComponent} from "./components/customer/customer-page/customer-page.component";
 import {ProductPageComponent} from "./components/shopping/showcase/product-page/product-page.component";
@@ -16,6 +18,8 @@ import {CheckoutPageComponent} from "./components/shopping/checkout-page/checkou
 import {OrderPageComponent} from "./components/customer/order-page/order-page.component";
 import {AdminStockComponent} from "./components/admin/admin-stock/admin-stock.component";
 import {HomeComponent} from "./components/home/home.component";
+import {AdminPaymentMethodComponent} from "./components/admin/admin-payment-method/admin-payment-method.component";
+import {PaymentMethodFormComponent} from "./components/admin/forms/payment-method/payment-method-form/payment-method-form.component";
 
 const routes: Routes = [
   {
@@ -63,8 +67,20 @@ const routes: Routes = [
     component: AdminStockComponent
   },
   {
+    path: 'create-payment-method',
+    component: PaymentMethodFormComponent
+  },
+  {
+    path: 'create-payment-method/:id',
+    component: PaymentMethodFormComponent
+  },
+  {
     path: 'admin-dashboard',
     component: AdminCategoriesComponent
+  },
+  {
+    path: 'admin-payment-method',
+    component: AdminPaymentMethodComponent
   },
   {
     path: 'login-page',
@@ -83,7 +99,7 @@ const routes: Routes = [
     component: CheckoutPageComponent
   },
   {
-    path: 'personal-page/order-page',
+    path: 'personal-page/order-page/:id',
     component: OrderPageComponent
   },
   {

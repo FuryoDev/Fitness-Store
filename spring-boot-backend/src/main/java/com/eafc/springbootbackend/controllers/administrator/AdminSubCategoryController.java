@@ -1,10 +1,14 @@
 package com.eafc.springbootbackend.controllers.administrator;
 
 import com.eafc.springbootbackend.entities.product.Category;
+import com.eafc.springbootbackend.entities.product.ProductInfo;
 import com.eafc.springbootbackend.entities.product.SubCategory;
 import com.eafc.springbootbackend.services.product.SubCategoryService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Collection;
 
 @RestController
@@ -33,8 +37,13 @@ public class AdminSubCategoryController {
         return subCategoryService.findAllSubCategories();
     }
 
-    @PostMapping("saveSubCategory")
-    public void saveSubCategory(@RequestBody SubCategory subCategory) {
-        subCategoryService.saveSubCategory(subCategory);
+    @PostMapping(value = "saveSubCategory", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public void saveSubCategory(@RequestPart("subCategory") SubCategory subCategory, @RequestPart("image") MultipartFile image) throws IOException {
+        subCategoryService.saveSubCategory(subCategory, image);
+    }
+
+    @DeleteMapping(value = "deleteSubCategory")
+    public void deleteSubCategory(@RequestParam("subCategoryId") Long subCategoryId) {
+        subCategoryService.deleteSubCategory(subCategoryId);
     }
 }

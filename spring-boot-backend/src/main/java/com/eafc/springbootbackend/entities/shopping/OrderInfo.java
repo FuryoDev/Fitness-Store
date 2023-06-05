@@ -16,9 +16,6 @@ public class OrderInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private Collection<OrderItem> orderItems;
-
     @NotNull
     private Calendar purchaseDate;
 
@@ -27,7 +24,7 @@ public class OrderInfo {
     @NotNull
     private double total;
 
-    @NotNull
+//    @NotNull
     @ManyToOne
     @JoinColumn(name = "paymentMethod")
     private PaymentMethod paymentMethod;

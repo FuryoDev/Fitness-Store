@@ -1,5 +1,6 @@
 import {Cart} from "./cart";
 import {ProductInfo} from "./product-info";
+import {Stock} from "../prod-details/stock";
 
 export class CartItem {
   cartItemId!: number
@@ -7,5 +8,5 @@ export class CartItem {
   productInfo!: ProductInfo
   quantity!: number
   totalPrice!: number
-  size!: string
+  relatedSizeAndStock!: Stock
 }

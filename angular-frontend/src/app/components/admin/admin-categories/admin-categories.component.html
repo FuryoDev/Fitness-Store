@@ -1,15 +1,23 @@
-<div class="admin-container">
-  <button><a [routerLink]="['/create-category']">Create</a></button>
-  <div class="cards-container">
-    <a class="admin-card-link" *ngFor="let category of categoryList" [routerLink]="['/subcategories', category.categoryId]">
-      <div class="admin-card">
-        <div class="admin-card-btn-container">
-          <a class="admin-card-btn edit-btn" [routerLink]="['/edit-category', category.categoryId]">E</a>
-          <a class="admin-card-btn delete-btn" [routerLink]="['/delete-category', category.categoryId]">X</a>
+<div class="wrapper">
+  <h1 class="admin-title">Category Management Dashboard</h1>
+  <div class="" *ngIf="categoryList.length == 0">
+    <button><a [routerLink]="['/create-category']">Create</a></button>
+    <p>Nothing to show</p>
+  </div>
+  <div *ngIf="categoryList.length > 0">
+    <button><a [routerLink]="['/create-category']">Create</a></button>
+    <div class="cards-container">
+      <a class="admin-card-link" *ngFor="let category of categoryList"
+         [routerLink]="['/subcategories', category.categoryId]">
+        <div class="admin-card">
+          <div class="admin-card-btn-container">
+            <a class="admin-card-btn edit-btn" [routerLink]="['/edit-category', category.categoryId]">E</a>
+            <a class="admin-card-btn delete-btn" (click)="deleteCategory(category.categoryId)">X</a>
+          </div>
+          <img [src]="category.imageURL" class="admin-card-img">
+          <p class="admin-card-title">{{category.name}}</p>
         </div>
-        <img class="admin-card-img" src="assets/images/admin-ex.jpg" alt="">
-        <p class="admin-card-title">{{category.name}}</p>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </div>

@@ -35,6 +35,9 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public void saveDiscount(Discount discount) {
+        if(discount.getDiscountId() == null) {
+
+        }
         discountRepository.save(discount);
     }
 

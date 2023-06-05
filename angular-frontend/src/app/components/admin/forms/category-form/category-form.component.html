@@ -1,10 +1,26 @@
- <form #categoryForm="ngForm" (ngSubmit)="saveCategory()">
-  <label for="name">Name</label>
-  <input id="name" name="name" placeholder="Enter Name" type="text" [(ngModel)]="category.name">
-   <label for="sizingType">Sizing Type</label>
-   <select id="sizingType" name="sizingType" [(ngModel)]="category.sizingType">
-     <option>Choose a clothing sizing type...</option>
-     <option *ngFor="let sizingType of sizingTypes" [ngValue]="sizingType">{{sizingType}}</option>
-   </select>
-  <button type="submit">Submit</button>
-</form>
+<div class="wrapper">
+  <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+    <label for="name">Name</label>
+    <input id="name" name="name" placeholder="Enter Name" type="text" formControlName="name"
+           [(ngModel)]="category.name">
+    <div *ngIf="name?.touched && name?.invalid" class="error-message">
+      <p style="color: red">Name is required.</p>
+    </div>
+
+    <label for="sizingType">Sizing Type</label>
+    <select id="sizingType" name="sizingType" formControlName="sizingType" [(ngModel)]="category.sizingType">
+      <option>Choose a clothing sizing type...</option>
+      <option *ngFor="let sizingType of sizingTypes" [ngValue]="sizingType">{{sizingType}}</option>
+    </select>
+    <div *ngIf="sizingType?.touched && sizingType?.invalid" class="error-message">
+      <p style="color: red">Name is required.</p>
+    </div>
+
+    <input type="file" id="image" name="image" (change)="onImageSelected($event)" formControlName="image">
+    <button type="submit">Submit</button>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <div *ngIf="image?.touched && image?.invalid" class="error-message">
+      <p style="color: red">image is required.</p>
+    </div>
+  </form>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductInfo} from "../../../../common/shopping/product-info";
 import {ActivatedRoute} from "@angular/router";
 import {ProductService} from "../../../../services/product.service";
@@ -7,6 +7,7 @@ import {StockService} from "../../../../services/prod-details/stock.service";
 import {SubCategoryService} from "../../../../services/prod-details/subcategory/sub-category.service";
 import {SubCategory} from "../../../../common/prod-details/sub-category";
 import {ImageService} from "../../../../services/images/image.service";
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-product-form',
@@ -15,19 +16,28 @@ import {ImageService} from "../../../../services/images/image.service";
 })
 export class ProductFormComponent implements OnInit {
 
+  productForm: FormGroup = new FormGroup({
+    name: new FormControl('', Validators.required),
+    price: new FormControl(0, Validators.required),
+    sex: new FormControl('unisex', Validators.required),
+    description: new FormControl('', Validators.required),
+    image: new FormControl('', Validators.required)
+  });
+
   product = new ProductInfo();
   imageFile: File | null = null;
-  imageFolderPath: string = "assets/images/products/"
-
   subCategoryList: SubCategory[] = [];
+  errorMessage: string | undefined;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private formBuilder: FormBuilder,
+              private route: ActivatedRoute,
               private subCategoryService: SubCategoryService,
-              private productService: ProductService) { }
+              private productService: ProductService) {
+  }
 
   ngOnInit(): void {
     const hasSubCategoryId: boolean = this.route.snapshot.paramMap.has('subCatId');
-    this.route.params.subscribe(() =>  {
+    this.route.params.subscribe(() => {
       this.initProductForm(hasSubCategoryId);
     })
 
@@ -39,7 +49,7 @@ export class ProductFormComponent implements OnInit {
 
 
   getProductData(hasProductId: boolean) {
-    if(hasProductId) {
+    if (hasProductId) {
       const productId: number = +this.route.snapshot.paramMap.get('id')!;
       this.productService.getProductByIdAdmin(productId).subscribe(
         data => {
@@ -48,16 +58,16 @@ export class ProductFormComponent implements OnInit {
       )
     }
   }
+
   initProductForm(hasSubCategoryId: boolean) {
-    if(hasSubCategoryId) {
+    if (hasSubCategoryId) {
       const subCategory: number = +this.route.snapshot.paramMap.get('subCatId')!;
       this.subCategoryService.getSubCategoryById(subCategory).subscribe(
         data => {
           this.product.subCategory = data;
         }
       )
-    }
-    else {
+    } else {
       const productId: number = +this.route.snapshot.paramMap.get('id')!;
       this.productService.getProductByIdAdmin(productId).subscribe(
         data => {
@@ -74,16 +84,34 @@ export class ProductFormComponent implements OnInit {
   }
 
   saveProduct() {
-    let formData = new FormData();
-    formData.append('productInfo', new Blob([JSON.stringify(this.product)], {type: 'application/json' }) );
-    if (this.imageFile) {
-      formData.append('image', this.imageFile);
+    if (this.productForm.valid) {
+      const product: ProductInfo = this.productForm.value;
+      this.productService.saveProduct(this.product, this.imageFile)
+        .subscribe(
+          response => {
+            // Handle success response
+            console.log('Product saved successfully', response);
+          },
+          error => {
+            // Handle error response
+            console.error('Error saving product', error);
+            this.errorMessage = error.error.message;
+          }
+        );
+    } else {
+      // Form is invalid, mark fields as touched to display validation errors
+      this.productForm.markAllAsTouched();
     }
-    this.productService.saveProduct(formData);
   }
 
   onImageSelected(event: any) {
     this.imageFile = event.target.files[0];
   }
+
+  get name() {return this.productForm.get('name'); }
+  get sex() { return this.productForm.get('sex'); }
+  get price() { return this.productForm.get('price'); }
+  get description() { return this.productForm.get('description'); }
+  get image() {return this.productForm.get('image'); }
 }
 

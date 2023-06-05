@@ -45,14 +45,17 @@ export class ProductService {
     return this.httpClient.get<ProductInfo>(this.baseUrl + 'admin/getProductById?id=' + productId)
   }
 
-  saveProduct(productFormData: FormData) {
-    return this.httpClient.post(this.baseUrl + 'admin/saveProduct', productFormData).subscribe(
-      value => console.log(value),
-      error => console.log(error));
+  saveProduct(product: ProductInfo, imageFile: File | null) {
+    let formData = new FormData();
+    formData.append('productInfo', new Blob([JSON.stringify(product)], {type: 'application/json' }) );
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
+    return this.httpClient.post(this.baseUrl + 'admin/saveProduct', formData);
   }
 
   deleteProduct(productId: number) {
-    return this.httpClient.delete(this.baseUrl + 'admin/deleteProduct?i='+ productId);
+    return this.httpClient.delete(this.baseUrl + 'admin/deleteProduct?productId='+ productId);
   }
 }
 

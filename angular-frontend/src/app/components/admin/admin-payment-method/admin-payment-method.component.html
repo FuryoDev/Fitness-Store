@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <h1 class="app-title">Payment Method Management</h1>
+  <div class="" *ngIf="paymentMethods.length == 0">
+    <p>Nothing to show</p>
+  </div>
+  <div class="" *ngIf="paymentMethods.length > 0">
+    <button><a [routerLink]="['/create-payment-method']">Create</a></button>
+    <table>
+      <thead>
+      <tr>
+        <th>
+          <p>Icon</p>
+        </th>
+        <th>
+          <p>Name</p>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let paymentMethod of paymentMethods">
+        <td>
+          Image du bazar
+        </td>
+        <td>
+          {{paymentMethod.name}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

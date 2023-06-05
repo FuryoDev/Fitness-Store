@@ -2,7 +2,6 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SubCategoryService} from "../../../../services/prod-details/subcategory/sub-category.service";
 import {SubCategory} from "../../../../common/prod-details/sub-category";
 import {ActivatedRoute} from "@angular/router";
-import {FiltersProductSharedService} from "../../../../services/shared/filters-product-shared.service";
 
 @Component({
   selector: 'app-sub-category-filter',

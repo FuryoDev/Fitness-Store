@@ -1,31 +1,37 @@
-<div class="orders-container">
-  <h1>All Orders</h1>
-  <h2>ID: DHSOIHDI</h2>
-  <p>20/03/2022</p>
-  <table>
+  <h1>Order Details</h1>
+
+  <div class="order-info">
+    <div class="order-info-item">
+      <span class="label">Date:</span>
+      <span class="value">{{ order.purchaseDate }}</span>
+    </div>
+    <div class="order-info-item">
+      <span class="label">Status:</span>
+      <span class="value">{{ order.pending }}</span>
+    </div>
+    <div class="order-info-item">
+      <span class="label">Payment Method:</span>
+      <span class="value">{{ order.paymentMethod }}</span>
+    </div>
+    <div class="order-info-item">
+      <span class="label">Total Price:</span>
+      <span class="value">{{ order.total }}</span>
+    </div>
+  </div>
+
+  <h2>Order Items</h2>
+
+  <table class="order-items-table">
+    <thead>
     <tr>
-      <th>
-        <p>Product</p>
-      </th>
-      <th>
-        <p>Quantity</p>
-      </th>
-      <th>
-        <p>Price (when bought)</p>
-      </th>
+      <th>Product</th>
+      <th>Quantity</th>
     </tr>
-    <tr>
-      <td>
-        Nom et img du product
-      </td>
-      <td>
-        4
-      </td>
-      <td>
-        41€
-      </td>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of orderItems">
+      <td>{{ item.product.name}}</td>
+      <td>{{ item.quantity }}</td>
     </tr>
+    </tbody>
   </table>
-  <p>Methode de paiement : Paypal</p>
-  <p>A l'addresse: Rue des Ailes, 106 Bruxelles</p>
-</div>

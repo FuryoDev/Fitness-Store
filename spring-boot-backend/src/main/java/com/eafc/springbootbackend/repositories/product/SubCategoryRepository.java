@@ -11,4 +11,6 @@ import java.util.Collection;
 public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> {
 
     Collection<SubCategory> findSubCategoriesByCategory(Category category);
+
+    boolean existsByName(String subCategoryName);
 }

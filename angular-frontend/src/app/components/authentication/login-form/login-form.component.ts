@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AccountInfo} from "../../../common/users/account-info";
 import {AuthService} from "../../../services/authentication/authentication.service";
 import {Router} from "@angular/router";
 import {LoginData} from "../../../common/authentication/login-data";
 import {TokenStorageService} from "../../../services/authentication/token-storage.service";
+import {HeaderSharedService} from "../../../services/shared/header-shared.service";
 
 @Component({
   selector: 'app-login-form',
@@ -17,7 +18,7 @@ export class LoginFormComponent implements OnInit {
   isLoginFailed = false;
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private router: Router, private headerService: HeaderSharedService, private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -25,6 +26,7 @@ export class LoginFormComponent implements OnInit {
       this.roles = this.tokenStorage.getUser().roles;
     }
   }
+
 
   logIn(): void {
     this.authService.login(this.loginData).subscribe(
@@ -35,7 +37,8 @@ export class LoginFormComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
+        this.headerService.reloadHeader();
+        this.router.navigate(['/home']).then(r => console.log(r));
       },
       error => {
         console.log(error.error.message);

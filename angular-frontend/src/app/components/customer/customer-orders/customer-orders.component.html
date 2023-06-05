@@ -1,23 +1,27 @@
-<h1>My order list</h1>
-<table>
-  <thead>
-  <tr>
-    <th>Ref.</th>
-    <th>Date of Order</th>
-    <th>Delivery</th>
-    <th>Payment</th>
-    <th>Status</th>
-    <th>Consult</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>Ah OUi oui oui</td>
-    <td>Ah OUi oui oui</td>
-    <td>Ah OUi oui oui</td>
-    <td>Ah OUi oui oui</td>
-    <td>Ah OUi oui oui</td>
-    <td><a [routerLink]="['order-page']">Consulter</a></td>
-  </tr>
-  </tbody>
-</table>
+<div class="" *ngIf="orders.length == 0">
+  <p>Nothing to show</p>
+</div>
+<div class="" *ngIf="orders.length > 0">
+  <h1>My order list</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Ref.</th>
+      <th>Date of OrderInfo</th>
+      <th>Payment</th>
+      <th>Status</th>
+      <th>Consult</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{order.orderId}}</td>
+      <td>{{order.purchaseDate}}</td>
+      <td>{{order.paymentMethod.name}}</td>
+      <td>{{order.pending}}</td>
+      <td><a [routerLink]="['order-page', order.orderId]">Consulter</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

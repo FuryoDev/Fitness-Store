@@ -1,28 +1,32 @@
-<div class="product-page">
-  <div class="details-container">
-    <h1 class="product-name">{{productInfo.name}}</h1>
-    <p class="product-price">
-      200 €
-    </p>
-    <hr class="horizontal-line">
-    <p class="product-size">size</p>
-    <div class="product-buttons">
-      <div class="quantity-buttons">
-        <button class="round-button" (click)="increment()">+</button>
-        <p>{{cartItem.quantity}}</p>
-        <button class="round-button" (click)="decrement()">-</button>
+<div class="wrapper">
+  <div class="product-page">
+    <div class="details-container">
+      <h1 class="product-name">{{productInfo.name}}</h1>
+      <p class="product-price">
+        200 €
+      </p>
+      <hr class="horizontal-line">
+      <p class="product-size">size</p>
+      <div class="product-buttons">
+        <div class="quantity-buttons">
+          <button class="round-button" (click)="changeQty(-1)">-</button>
+          <p>{{cartItem.quantity}}</p>
+          <button class="round-button" (click)="changeQty(1)" [disabled]="!isInStock">+</button>
+        </div>
+        <div class="size-buttons">
+          <button *ngFor="let size of stocks" (click)="selectSize(size)" [class.selected]="isSelectedSize(size)"
+                  class="product-btn">{{size.size}}</button>
+        </div>
       </div>
-      <div class="size-buttons">
-        <button *ngFor="let size of stocks"  class="product-btn">{{size.size}}</button>
-      </div>
-
+      <p style="color: red">{{errorMessage}}</p>
+      <button class="add-to-cart-btn" (click)="addToCart()" [disabled]="!isSizeSelected()">Add to cart</button>
+      <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad adipisci
+        aliquid atque autem blanditiis consequuntur delectus eius explicabo impedit inventore ipsa, maiores molestiae,
+        mollitia numquam optio perspiciatis, tempora ut.</p>
     </div>
-    <button class="add-to-cart-btn" (click)="addToCart()"><span>Add to cart</span></button>
-    <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad adipisci
-      aliquid atque autem blanditiis consequuntur delectus eius explicabo impedit inventore ipsa, maiores molestiae,
-      mollitia numquam optio perspiciatis, tempora ut.</p>
-  </div>
-  <div class="image-container">
-    <img [src]="productInfo.imageURL" class="product-image">
+    <div class="image-container">
+      <img [src]="productInfo.imageURL" class="product-image">
+    </div>
   </div>
 </div>
+

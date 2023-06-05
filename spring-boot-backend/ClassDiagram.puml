@@ -1,0 +1,183 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class AccountInfo implements UserDetails {
+    Long customerId;
+    String name;
+    private Cart cart;
+    private String lastName;
+    private String username;
+    private String password;
+    private String email;
+    private Calendar birthday;
+    private Set<Role> roles = new HashSet<>();
+}
+
+
+class Discount {
+    private Long discountId;
+    private String discountName;
+    private int percentage;
+    private boolean isActive;
+    private Collection<ProductInfo> productsInDiscount;
+}
+
+class ShippingAddress {
+
+    private Long shippingAddressId;
+    private String streetNameAndNumber;
+    private String zipCode;
+    private String city;
+    private String country;
+    private AccountInfo customer;
+}
+
+class ProductInfo {
+    private Long productId;
+    private String name;
+    private double price;
+    private String imageURL;
+    private String description;
+    private Calendar creationDate;
+    private SubCategory subCategory;
+}
+
+class Category {
+    private Long categoryId;
+    private String name;
+    private String sizingType;
+    private String imageURL;
+}
+
+class SubCategory {
+    private Long subCategoryId;
+    private String name;
+    private Category category;
+    private String imageURL;
+}
+
+class Stock {
+    private Long stockId;
+    private String size;
+    private int itemsInStock;
+    private int maxItems;
+    private ProductInfo product;
+}
+
+
+class Cart {
+    private Long cartId;
+    private double totalPrice;
+}
+
+class CartItem {
+    private Long cartItemId;
+    private Cart cart;
+    private ProductInfo productInfo;
+    private int quantity;
+    private double totalPrice;
+    private Stock relatedSizeAndStock;
+}
+
+
+class OrderInfo {
+    private Long orderId;
+    private Calendar purchaseDate;
+    private boolean pending;
+    private double total;
+    private PaymentMethod paymentMethod;
+    private AccountInfo customer;
+}
+
+class OrderItem {
+    private Long orderItemId;
+    private ProductInfo product;
+    private OrderInfo order;
+    private double purchasedPrice;
+    private double totalPrice;
+    private Stock relatedStockAndSize;
+    private int quantity;
+}
+
+
+class PaymentMethod {
+    private Long paymentMethodId;
+    private String name;
+    private String iconURL;
+}
+
+class Role {
+    private Long roleId;
+    private String name;
+}
+
+AccountInfo "1" --> "1" Cart
+AccountInfo "n" --> "1" Role
+
+Discount "1" --> "n" ProductInfo
+
+ProductInfo "n" --> "1" SubCategory
+ProductInfo "1" --> "n" Stock
+
+
+SubCategory "n" --> "1" Category
+
+CartItem "n" --> "1" Cart
+CartItem "n" --> "1" ProductInfo
+CartItem "n" --> "1" Stock
+
+OrderInfo "n" --> "1" PaymentMethod
+OrderInfo "n" --> "1" AccountInfo
+
+OrderItem "n" --> "1" ProductInfo
+OrderItem "n" --> "1" OrderInfo
+OrderItem "n" --> "1" Stock
+
+ShippingAddress "1"--> "1" AccountInfo
+
+
+skinparam class {
+    BackgroundColor #2B2B2B
+    BorderColor #CCCCCC
+    ArrowColor #CCCCCC
+    FontColor #FFFFFF
+    FontSize 14
+    FontStyle Bold
+    AttributeFontColor #FFFFFF  // Set font color of attributes (properties)
+}
+
+skinparam linetype ortho
+
+skinparam package {
+    BackgroundColor #3C3F41
+    BorderColor #CCCCCC
+    ArrowColor #CCCCCC
+    FontColor #FFFFFF
+    FontSize 16
+    FontStyle Bold
+}
+
+skinparam attribute {
+    FontColor #FFFFFF
+}
+
+skinparam stereotype {
+    BackgroundColor #2B2B2B
+    BorderColor #CCCCCC
+    ArrowColor #CCCCCC
+    FontColor #FFFFFF
+}
+
+
+
+
+@enduml
+}
+
+enum ROLE {
+DAYS
+HOURS
+MINUTES
+}
+
+@enduml

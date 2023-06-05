@@ -1,15 +1,38 @@
-<form class="form prod-form" #productForm="ngForm" (ngSubmit)="saveProduct()">
-  <label for="name">Name</label>
-  <input id="name" name="name" type="text" [(ngModel)]="product.name">
-  <label for="subCategory">Type of product</label>
-  <select id="subCategory" name="subCategory" [(ngModel)]="product.subCategory">
-    <option *ngFor="let subCategory of subCategoryList" [ngValue]="subCategory">{{subCategory.name}}</option>
-  </select>
-  <label for="price">Price</label>
-  <input type="number" id="price" name="price" [(ngModel)]="product.price">
-  <label for="description">Description</label>
-  <input id="description" name="description" type="text" class="description" [(ngModel)]="product.description">
-  <label for="image">Product Image:</label>
-  <input type="file" id="image" name="image" (change)="onImageSelected($event)">
-  <button type="submit">Submit</button>
-</form>
+  <form class="form prod-form" [formGroup]="productForm" (ngSubmit)="saveProduct()">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" formControlName="name" [(ngModel)]="product.name">
+    <div *ngIf="name?.touched && name?.invalid" class="error-message">
+      <p style="color: red">Name is required.</p>
+    </div>
+
+
+    <label for="price">Price</label>
+    <input type="number" id="price" name="price"  formControlName="price" [(ngModel)]="product.price">
+    <div *ngIf="price?.touched && price?.invalid" class="error-message">
+      <p style="color: red">Price is required.</p>
+    </div>
+
+    <label for="sex">Sex</label>
+    <select id="sex" name="sex" formControlName="sex" [(ngModel)]="product.sex">
+      <option value="unisex">Unisex</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <div *ngIf="sex?.touched && sex?.invalid" class="error-message">
+      <p style="color: red">Sex is required.</p>
+    </div>
+
+    <label for="description">Description</label>
+    <input id="description" name="description" type="text" class="description"  formControlName="description" [(ngModel)]="product.description">
+    <div *ngIf="description?.touched && description?.invalid" class="error-message">
+      <p style="color: red">Description is required.</p>
+    </div>
+
+    <input type="file" id="image" name="image" (change)="onImageSelected($event)" formControlName="image">
+    <div *ngIf="image?.touched && image?.invalid" class="error-message">
+      <p style="color: red">image is required.</p>
+    </div>
+
+    <button type="submit">Submit</button>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </form>

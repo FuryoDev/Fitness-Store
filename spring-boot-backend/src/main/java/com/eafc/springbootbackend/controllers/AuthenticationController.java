@@ -100,6 +100,8 @@ public class AuthenticationController {
 
         // Create new user's account
         AccountInfo user = new AccountInfo();
+        user.setName(signUpRequest.getName());
+        user.setLastName(signUpRequest.getLastName());
         user.setEmail(signUpRequest.getEmail());
         user.setUsername(signUpRequest.getUsername());
         user.setPassword(encoder.encode(signUpRequest.getPassword()));
@@ -135,8 +137,8 @@ public class AuthenticationController {
 
         user.setRoles(roles);
         Cart newCart = new Cart();
-        newCart.setAccountInfo(user);
         cartService.saveCart(newCart);
+        user.setCart(newCart);
         userDetailsService.saveAccount(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

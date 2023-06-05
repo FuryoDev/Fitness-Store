@@ -40,4 +40,15 @@ export class AdminProductsComponent implements OnInit {
       }
     )
   }
+
+  deleteProduct(productId: number) {
+    this.productService.deleteProduct(productId).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }

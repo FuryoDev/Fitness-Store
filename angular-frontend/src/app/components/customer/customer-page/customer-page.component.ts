@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TokenStorageService} from "../../../services/authentication/token-storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-customer-page',
@@ -11,7 +12,8 @@ export class CustomerPageComponent implements OnInit {
   isPersonalActive: boolean = true;
   isOrdersActive: boolean = false;
 
-  constructor(private tokenStorageService : TokenStorageService) { }
+  constructor(private tokenStorageService : TokenStorageService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.isPersonalActive = true;
@@ -31,6 +33,7 @@ export class CustomerPageComponent implements OnInit {
   logout() {
     this.tokenStorageService.signOut();
     window.location.reload();
+
   }
 
 }

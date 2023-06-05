@@ -1,25 +1,36 @@
-<button><a [routerLink]="['/create-product']">New Product</a></button>
-
-<table>
-  <thead>
-  <tr>
-    <th>Nom</th>
-    <th>Nom</th>
-    <th>Nom</th>
-    <th>Nom</th>
-    <th>Nom</th>
-    <th>Nom</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let product of products">
-    <td>{{product.name}}</td>
-    <td>{{product.name}}</td>
-    <td>{{product.name}}</td>
-    <td>{{product.name}}</td>
-    <td><a [routerLink]="['/edit-product', product.productId]">Edit Product</a></td>
-    <td><a [routerLink]="['/edit-stock', product.productId]">Manage stock</a></td>
-  </tr>
-  </tbody>
-</table>
-
+<div class="wrapper">
+  <div class="" *ngIf="products.length == 0">
+    <button><a [routerLink]="['/create-product', subCategoryId]">New Product</a></button>
+    <p>Nothing to show</p>
+  </div>
+  <div class="" *ngIf="products.length > 0">
+    <button><a [routerLink]="['/create-product', subCategoryId]">New Product</a></button>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Sex</th>
+        <th>Price</th>
+        <th>Sub-category</th>
+        <th>Category</th>
+        <th>CRUD</th>
+        <th>Stock Management</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{product.name}}</td>
+        <td>{{product.sex}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.subCategory.name}}</td>
+        <td>{{product.subCategory.category.name}}</td>
+        <td>
+          <a [routerLink]="['/edit-product', product.productId]">Edit Product</a>
+          <a (click)="deleteProduct(product.productId)">Delete Product</a>
+        </td>
+        <td><a [routerLink]="['/edit-stock', product.productId]">Manage stock</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,8 +1,24 @@
-<form #subCategoryForm="ngForm" (ngSubmit)="saveSubCategory()">
-  <label for="name">Name</label>
-  <input id="name" name="name" placeholder="Enter Name" type="text" [(ngModel)]="subCategory.name">
-  <select name="category" [(ngModel)]="subCategory.category" >
-    <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
-  </select>
-  <button type="submit">Submit</button>
-</form>
+<div class="wrapper">
+  <form [formGroup]="subCategoryForm" (ngSubmit)="saveSubCategory()">
+    <label for="name">Name</label>
+    <input id="name" name="name" placeholder="Enter Name" type="text" formControlName="name"
+           [(ngModel)]="subCategory.name">
+    <div *ngIf="name?.touched && name?.invalid" class="error-message">
+      <p style="color: red">Name is required.</p>
+    </div>
+
+    <select name="category" formControlName="category" [(ngModel)]="subCategory.category">
+      <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
+    </select>
+    <div *ngIf="category?.touched && category?.invalid" class="error-message">
+      <p style="color: red">image is required.</p>
+    </div>
+
+    <input type="file" id="image" name="image" (change)="onImageSelected($event)" formControlName="image">
+    <button type="submit">Submit</button>
+    <div *ngIf="image?.touched && image?.invalid" class="error-message">
+      <p style="color: red">image is required.</p>
+    </div>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </form>
+</div>

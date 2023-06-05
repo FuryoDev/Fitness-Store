@@ -8,6 +8,8 @@
       <a [routerLink]="['products-showcase', category.categoryId]" *ngFor="let category of categories"
          href="">{{category.name}}</a>
       <a *ngIf="isAdmin" [routerLink]="['/admin-dashboard']">Admin</a>
+      <a *ngIf="isAdmin" [routerLink]="['/admin-payment-method']">Admin PayMeth</a>
+
     </div>
   </nav>
   <div class="user-links">

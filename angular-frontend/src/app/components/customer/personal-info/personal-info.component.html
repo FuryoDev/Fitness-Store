@@ -1,10 +1,28 @@
 <h1>My Personal Information</h1>
-<form class="form" #customerForm="ngForm" (ngSubmit)="saveCustomerInfo()">
-    <label for="name">Name</label>
-    <input id="name" name="name" type="text">
-    <label for="lastname">Lastname</label>
-    <input id="lastname" name="lastname" type="text">
-    <label for="mail">Mail</label>
-    <input id="mail" name="mail" type="text">
+
+<form class="form" [formGroup]="customerForm" (ngSubmit)="saveCustomerInfo()">
+  <label for="username">Username</label>
+  <div class="input-group">
+    <input id="username" name="username" type="text" [value]="accountInfo.username"
+           [disabled]="true" required>
+  </div>
+
+  <label for="name">Name</label>
+  <input id="name" name="name" type="text" formControlName="name" [(ngModel)]="accountInfo.name">
+  <div *ngIf="name?.touched && name?.invalid" class="error-message">
+    <p style="color: red">Name is required.</p>
+  </div>
+
+  <label for="lastName">Lastname</label>
+  <input id="lastName" name="lastName" type="text" formControlName="lastName" [(ngModel)]="accountInfo.lastName">
+  <div *ngIf="lastName?.touched && lastName?.invalid" class="error-message">
+    <p style="color: red">Lastname is required.</p>
+  </div>
+
+  <label for="email">Mail</label>
+  <input id="email" name="email" type="text" [value]="accountInfo.email" [disabled]="true" required>
+
+  <label for="birthDay">Birthday</label>
+  <input id="birthDay" name="birthDay" type="date" [(ngModel)]="accountInfo.birthDay">
   <button type="submit">Submit</button>
 </form>

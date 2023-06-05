@@ -27,7 +27,16 @@ export class SubCategoryService {
     return this.httpClient.get<SubCategory[]>(this.baseUrl +'admin/getAllSubCategories');
   }
 
-  saveSubCategory(subCategory: SubCategory) {
-    return this.httpClient.post(this.baseUrl + 'admin/saveSubCategory',subCategory);
+  saveSubCategory(subCategory: SubCategory, imageFile: File | null) {
+    let formData = new FormData();
+    formData.append('subCategory', new Blob([JSON.stringify(subCategory)], {type: 'application/json' }) );
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
+    return this.httpClient.post(this.baseUrl + 'admin/saveSubCategory', formData);
+  }
+
+  deleteSubCategory(subCategoryId: number) {
+    return this.httpClient.delete(this.baseUrl + 'admin/deleteSubCategory?subCategoryId=' + subCategoryId);
   }
 }

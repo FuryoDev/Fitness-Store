@@ -5,6 +5,7 @@ import {SubCategory} from "../../../../common/prod-details/sub-category";
 import {Category} from "../../../../common/prod-details/category";
 import {CategoryService} from "../../../../services/prod-details/category/category.service";
 import {Observable} from "rxjs";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-sub-category-form',
@@ -13,9 +14,16 @@ import {Observable} from "rxjs";
 })
 export class SubCategoryFormComponent implements OnInit {
 
+  subCategoryForm: FormGroup = new FormGroup({
+    name: new FormControl('', Validators.required),
+    category: new FormControl('', Validators.required),
+    image: new FormControl('', Validators.required)
+  });
   currentCategory=  new Category();
   subCategory = new SubCategory();
   categoryList : Category[] = []
+  imageFile: File | null = null;
+  errorMessage: string | undefined;
 
   constructor(private route: ActivatedRoute,
               private subCategoryService: SubCategoryService,
@@ -54,9 +62,21 @@ export class SubCategoryFormComponent implements OnInit {
   }
 
   saveSubCategory() {
-    console.log(this.subCategory);
-    this.subCategoryService.saveSubCategory(this.subCategory).subscribe(
-      result => console.log("SubCat save")
-    )
+    this.subCategoryService.saveSubCategory(this.subCategory, this.imageFile).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        this.errorMessage = error.error.message;;
+      }
+    );
   }
+
+  onImageSelected(event: any) {
+    this.imageFile = event.target.files[0];
+  }
+
+  get name() {return this.subCategoryForm.get('name'); }
+  get category() {return this.subCategoryForm.get('category'); }
+  get image() {return this.subCategoryForm.get('image'); }
 }

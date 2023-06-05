@@ -4,6 +4,7 @@ import {CategoryService} from "../../../services/prod-details/category/category.
 import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
 import {faCartShopping} from "@fortawesome/free-solid-svg-icons/faCartShopping";
 import {TokenStorageService} from "../../../services/authentication/token-storage.service";
+import {HeaderSharedService} from "../../../services/shared/header-shared.service";
 
 @Component({
   selector: 'app-header',
@@ -19,9 +20,16 @@ HeaderComponent implements OnInit {
   faCart = faCartShopping
   categories: Category[] = [];
 
-  constructor(private categoryService: CategoryService, private tokenStorageService: TokenStorageService) { }
+  constructor(private categoryService: CategoryService, private headerService: HeaderSharedService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.headerService.reloadHeader$.subscribe(() => {
+      this.loadHeaderData();
+    });
+  }
+
+  loadHeaderData() {
+    console.log('Header component reloaded.');
     this.retrieveCategories();
     this.isUserLoggedIn();
     this.isUserAdmin();
@@ -41,7 +49,6 @@ HeaderComponent implements OnInit {
 
   isUserAdmin() {
     let roles = this.tokenStorageService.getUser().roles;
-    console.log(roles);
     this.isAdmin = !!roles.includes("ADMIN");
   }
 }

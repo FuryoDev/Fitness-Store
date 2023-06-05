@@ -1,13 +1,20 @@
-<div class="admin-container">
+<div class="wrapper">
+  <h1 class="app-title">Sub-categories Management Dashboard</h1>
+  <div class="" *ngIf="subCategories.length == 0">
+    <p>Nothing to show</p>
+  </div>
+  <div class="" *ngIf="subCategories.length > 0">
+  </div>
   <button><a [routerLink]="['/create-subcategory', categoryId]">Create</a></button>
   <div class="cards-container">
-    <a class="admin-card-link" *ngFor="let subCategory of subCategories" [routerLink]="['/admin-products-by-subcategory', subCategory.subCategoryId]">
+    <a class="admin-card-link" *ngFor="let subCategory of subCategories"
+       [routerLink]="['/admin-products-by-subcategory', subCategory.subCategoryId]">
       <div class="admin-card">
         <div class="admin-card-btn-container">
           <a class="admin-card-btn edit-btn" [routerLink]="['/edit-subcategory', subCategory.subCategoryId]">E</a>
-          <a class="admin-card-btn delete-btn" [routerLink]="['/delete-subcategory', subCategory.subCategoryId]">X</a>
+          <a class="admin-card-btn delete-btn" (click)="deleteSubCategory(subCategory.subCategoryId)">X</a>
         </div>
-        <img class="admin-card-img" src="assets/images/admin-ex.jpg" alt="">
+        <img [src]="subCategory.imageURL" class="admin-card-img">
         <p class="admin-card-title">{{subCategory.name}}</p>
       </div>
     </a>

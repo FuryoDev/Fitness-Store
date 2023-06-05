@@ -1,7 +1,14 @@
-<div class="">
-  <app-header></app-header>
-  <div class="main">
-    <router-outlet></router-outlet>
+<div class="app-container">
+  <div class="app-header">
+    <app-header></app-header>
   </div>
-  <app-footer></app-footer>
+  <div class="main-page">
+    <img src="assets/images/background.JPG" alt="Background Image" class="background-image">
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="app-footer">
+    <app-footer></app-footer>
+  </div>
 </div>

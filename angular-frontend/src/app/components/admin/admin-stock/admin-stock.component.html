@@ -1,22 +1,24 @@
-<div class="stock-container">
-  <div class="stock-details">
-    <h1>Stock for Adidas Jacket</h1>
-    <img src="assets/images/vesteexemple.jpg" alt="">
-  </div>
-  <div class="stock-size-form">
-    <form #stockForm="ngForm" (ngSubmit)="saveStocks()">
-      <div *ngFor="let stock of product.stocks">
-        <label for="stock.stockId"></label>
-        <input id="stock.stockId" name="stock.size" type="number">
-      </div>
-      <label for="mock">Small</label>
-      <input id="mock" name="stock.size" type="number">
-      <label for="mock1">Medium</label>
-      <input id="mock1" name="stock.size" type="number">
-      <label for="mock3">Large</label>
-      <input id="mock3" name="stock.size" type="number">
-      <label for="mock4">X-Large</label>
-      <input id="mock4" name="stock.size" type="number">
-    </form>
+<div class="wrapper">
+  <h1 class="app-title">Stock Management for product x Management for product x</h1>
+  <div class="stock-container">
+    <div class="stock-details">
+      <img src="assets/images/vesteexemple.jpg" alt="">
+    </div>
+    <div class="stock-size-form">
+      <form #stockForm="ngForm" (ngSubmit)="saveStocks()">
+        <div *ngFor="let stock of product.stocks">
+          <label for="stock.stockId"></label>
+          <input id="stock.stockId" name="stock.size" type="number">
+        </div>
+        <label for="mock">Small</label>
+        <input id="mock" name="stock.size" type="number">
+        <label for="mock1">Medium</label>
+        <input id="mock1" name="stock.size" type="number">
+        <label for="mock3">Large</label>
+        <input id="mock3" name="stock.size" type="number">
+        <label for="mock4">X-Large</label>
+        <input id="mock4" name="stock.size" type="number">
+      </form>
+    </div>
   </div>
 </div>

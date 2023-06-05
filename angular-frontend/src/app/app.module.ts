@@ -3,7 +3,6 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {TempoComponent} from './components/tempo/tempo.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ProductService} from "./services/product.service";
 import {HeaderComponent} from './components/navigation/header/header.component';
@@ -35,12 +34,15 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {AdminStockComponent} from './components/admin/admin-stock/admin-stock.component';
 import {JwtInterceptor, JwtModule} from "@auth0/angular-jwt";
 import { HomeComponent } from './components/home/home.component';
+import { AdminPaymentMethodComponent } from './components/admin/admin-payment-method/admin-payment-method.component';
+import { PaymentMethodFormComponent } from './components/admin/forms/payment-method/payment-method-form/payment-method-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToCardinalPipe } from './pipes/to-cardinal.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TempoComponent,
     HeaderComponent,
     FooterComponent,
     ProductByCategoryComponent,
@@ -66,7 +68,10 @@ import { HomeComponent } from './components/home/home.component';
     CustomerOrdersComponent,
     OrderPageComponent,
     AdminStockComponent,
-    HomeComponent
+    HomeComponent,
+    AdminPaymentMethodComponent,
+    PaymentMethodFormComponent,
+    ToCardinalPipe
   ],
   imports: [
     BrowserModule,
@@ -74,6 +79,7 @@ import { HomeComponent } from './components/home/home.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem('auth-token')
