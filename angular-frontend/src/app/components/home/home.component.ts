@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ProductInfo} from "../../common/shopping/product-info";
+import {ProductService} from "../../services/product.service";
+import {Observable} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +11,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  latestProducts: ProductInfo[] = [];
+  discountProducts: ProductInfo[] = [];
+  lowStockProducts: ProductInfo[] = [];
 
-  ngOnInit(): void {
+  constructor(private productService: ProductService,
+              private route: ActivatedRoute) {
   }
 
+  ngOnInit(): void {
+    this.retrieveProducts();
+  }
+
+  retrieveProducts() {
+    this.productService.getAllProducts().subscribe(
+      data => {
+        this.latestProducts = data;
+        this.discountProducts = data;
+        this.lowStockProducts = data;
+      }
+    );
+  }
+
+  private retrieveOtherProducts() {
+
+  }
+
+  private retrieveThridProducts() {
+
+  }
 }

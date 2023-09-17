@@ -18,9 +18,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let paymentMethod of paymentMethods">
-        <td>
-          Image du bazar
-        </td>
+        <td><img [src]="paymentMethod.iconURL" alt="Product Image" class="paym-icon"></td>
         <td>
           {{paymentMethod.name}}
         </td>

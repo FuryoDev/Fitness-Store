@@ -20,8 +20,8 @@ export class ProductService {
     return this.httpClient.get<Stock>(this.baseUrl + 'oneStock');
   }
 
-  getAllProducts(): Observable<ProductInfo[]> {
-    return this.httpClient.get<ProductInfo[]>(this.baseUrl + 'products');
+  getAllProducts() {
+    return this.httpClient.get<ProductInfo[]>(this.baseUrl + 'getAllProducts');
   }
 
   //TODO: Add a parameter here

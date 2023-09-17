@@ -38,6 +38,9 @@ import { AdminPaymentMethodComponent } from './components/admin/admin-payment-me
 import { PaymentMethodFormComponent } from './components/admin/forms/payment-method/payment-method-form/payment-method-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToCardinalPipe } from './pipes/to-cardinal.pipe';
+import { SliderComponent } from './components/slider/slider.component';
+import { NextDirective } from './directives/next.directive';
+import { PreviousDirective } from './directives/previous.directive';
 
 
 @NgModule({
@@ -71,7 +74,10 @@ import { ToCardinalPipe } from './pipes/to-cardinal.pipe';
     HomeComponent,
     AdminPaymentMethodComponent,
     PaymentMethodFormComponent,
-    ToCardinalPipe
+    ToCardinalPipe,
+    SliderComponent,
+    NextDirective,
+    PreviousDirective
   ],
   imports: [
     BrowserModule,
