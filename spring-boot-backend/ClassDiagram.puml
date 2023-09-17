@@ -112,12 +112,12 @@ class Role {
 }
 
 AccountInfo "1" --> "1" Cart
-AccountInfo "n" --> "1" Role
+AccountInfo "n" --> "n" Role
 
 Discount "1" --> "n" ProductInfo
 
 ProductInfo "n" --> "1" SubCategory
-ProductInfo "1" --> "n" Stock
+Stock "n" --> "1" ProductInfo
 
 
 SubCategory "n" --> "1" Category

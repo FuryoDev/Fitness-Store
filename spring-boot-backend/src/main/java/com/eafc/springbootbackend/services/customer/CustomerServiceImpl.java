@@ -15,8 +15,6 @@ public class CustomerServiceImpl implements CustomerService {
     private final RoleRepository roleRepository;
 
 
-
-
     public CustomerServiceImpl(AccountInfoRepository accountInfoRepository, RoleRepository roleRepository) {
         this.accountInfoRepository = accountInfoRepository;
         this.roleRepository = roleRepository;

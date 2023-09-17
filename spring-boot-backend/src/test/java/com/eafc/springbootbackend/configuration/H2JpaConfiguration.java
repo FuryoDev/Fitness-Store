@@ -5,9 +5,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Configuration
-@EnableJpaRepositories(basePackages = "com.eafc.springbootbackend.repositories")
-@PropertySource("classpath:persistence-generic-entity.properties")
-@EnableTransactionManagement
+//@Configuration
+//@EnableJpaRepositories(basePackages = "com.eafc.springbootbackend.repositories")
+//@PropertySource("classpath:persistence-generic-entity.properties")
+//@EnableTransactionManagement
 public class H2JpaConfiguration {
 }

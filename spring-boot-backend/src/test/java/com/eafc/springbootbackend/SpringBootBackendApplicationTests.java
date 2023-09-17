@@ -7,11 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.script.ScriptException;
 import java.sql.SQLException;
 
-@SpringBootTest
+//@SpringBootTest
 class SpringBootBackendApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
 }

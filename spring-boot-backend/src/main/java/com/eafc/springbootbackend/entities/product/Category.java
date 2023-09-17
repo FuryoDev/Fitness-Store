@@ -14,7 +14,7 @@ import java.util.Collection;
 
 @Entity
 @Data
-public class Category extends AccountInfo {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
