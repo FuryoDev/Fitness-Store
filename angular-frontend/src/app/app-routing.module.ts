@@ -19,7 +19,14 @@ import {OrderPageComponent} from "./components/customer/order-page/order-page.co
 import {AdminStockComponent} from "./components/admin/admin-stock/admin-stock.component";
 import {HomeComponent} from "./components/home/home.component";
 import {AdminPaymentMethodComponent} from "./components/admin/admin-payment-method/admin-payment-method.component";
-import {PaymentMethodFormComponent} from "./components/admin/forms/payment-method/payment-method-form/payment-method-form.component";
+import {
+  PaymentMethodFormComponent
+} from "./components/admin/forms/payment-method/payment-method-form/payment-method-form.component";
+import {AdminDiscountComponent} from "./components/admin/admin-discount/admin-discount.component";
+import {DiscountFormComponent} from "./components/admin/forms/discount-form/discount-form.component";
+import {
+  DiscountToProductComponent
+} from "./components/admin/admin-discount/discount-to-product/discount-to-product.component";
 
 const routes: Routes = [
   {
@@ -71,12 +78,24 @@ const routes: Routes = [
     component: PaymentMethodFormComponent
   },
   {
-    path: 'create-payment-method/:id',
+    path: 'edit-payment-method/:id',
     component: PaymentMethodFormComponent
   },
   {
     path: 'admin-dashboard',
     component: AdminCategoriesComponent
+  },
+  {
+    path: 'admin-discount',
+    component: AdminDiscountComponent
+  },
+  {
+    path: 'discount-products',
+    component: DiscountToProductComponent
+  },
+  {
+    path: 'create-discount',
+    component: DiscountFormComponent
   },
   {
     path: 'admin-payment-method',

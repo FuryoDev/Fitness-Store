@@ -1,5 +1,5 @@
+<div class="wrapper">
   <h1>Order Details</h1>
-
   <div class="order-info">
     <div class="order-info-item">
       <span class="label">Date:</span>
@@ -11,27 +11,30 @@
     </div>
     <div class="order-info-item">
       <span class="label">Payment Method:</span>
-      <span class="value">{{ order.paymentMethod }}</span>
+      <img class="o-paym-icon" [src]="order.paymentMethod.iconURL" alt="Icon Pauy Meth">
     </div>
     <div class="order-info-item">
       <span class="label">Total Price:</span>
-      <span class="value">{{ order.total }}</span>
+      <span class="value">{{ order.total.toFixed(2) }}</span>
     </div>
   </div>
-
   <h2>Order Items</h2>
-
   <table class="order-items-table">
     <thead>
     <tr>
+      <th>Product</th>
       <th>Product</th>
       <th>Quantity</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let item of orderItems">
+      <td>
+        <img class="o-product-img" [src]="item.product.imageURL" alt="">
+      </td>
       <td>{{ item.product.name}}</td>
       <td>{{ item.quantity }}</td>
     </tr>
     </tbody>
   </table>
+</div>

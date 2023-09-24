@@ -36,16 +36,22 @@ public class ProductInfoController {
     }
 
     @GetMapping("get-product")
-    private ProductInfo getProductById(@RequestParam("id") Long productId){
+    private ProductInfo getProductById(@RequestParam("id") Long productId) {
         return productService.findProductById(productId);
     }
 
-    @GetMapping("get-latest-products")
-    private Collection<ProductInfo> getLatestProducts() {
+    @GetMapping("getLatestProduct")
+    private Collection<ProductInfo> getLatestProduct() {
         return productService.findLatestProducts();
     }
-//    @GetMapping("get-discounted-products")
-//    private Collection<ProductInfo> getDiscountedProducts() {
-//        return  productService.findDiscountedProducts();
-//    }
+
+    @GetMapping("/getLowStockProduct")
+    private Collection<ProductInfo> getLowStockProduct() {
+        return productService.getLowStockProduct();
+    }
+
+    @GetMapping("/getDiscountedProducts")
+    private Collection<ProductInfo> getDiscountedProducts() {
+        return productService.getDiscountedProducts();
+    }
 }

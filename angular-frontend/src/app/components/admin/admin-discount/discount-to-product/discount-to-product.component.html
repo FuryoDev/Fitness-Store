@@ -1,0 +1,53 @@
+<div class="wrapper">
+
+  <!-- Zone de recherche -->
+  <div class="search-section">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search by product name" (keyup)="filterProducts()">
+
+    <!-- Dropdown pour les catégories -->
+    <div class="dropdown">
+      <button class="dropbtn">Categories</button>
+      <div class="dropdown-content">
+        <label *ngFor="let category of categories">
+          <input type="checkbox" [(ngModel)]="selectedCategories[category.name]" (change)="filterProducts()">{{category.name}}
+        </label>
+      </div>
+    </div>
+
+    <!-- Dropdown pour les sous-catégories -->
+    <div class="dropdown">
+      <button class="dropbtn">Sub-Categories</button>
+      <div class="dropdown-content">
+        <label *ngFor="let subCategory of subCategories">
+          <input type="checkbox" [(ngModel)]="selectedSubCategories[subCategory.name]" (change)="filterProducts()">{{subCategory.name}}
+        </label>
+      </div>
+    </div>
+
+
+    <div class="" *ngIf="products.length == 0">
+    <p>Nothing to show</p>
+  </div>
+  <div class="" *ngIf="products.length > 0">
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Sex</th>
+        <th>Price</th>
+        <th>Sub-category</th>
+        <th>Category</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of filteredProducts">
+        <td>{{product.name}}</td>
+        <td>{{product.sex}}</td>
+        <td>{{product.price.toFixed(2)}}</td>
+        <td>{{product.subCategory.name}}</td>
+        <td>{{product.subCategory.category.name}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

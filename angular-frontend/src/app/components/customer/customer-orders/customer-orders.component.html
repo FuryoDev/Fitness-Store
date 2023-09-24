@@ -16,7 +16,7 @@
     <tbody>
     <tr *ngFor="let order of orders">
       <td>{{order.orderId}}</td>
-      <td>{{order.purchaseDate}}</td>
+      <td>{{order.purchaseDate | date:'short'}}</td>
       <td>{{order.paymentMethod.name}}</td>
       <td>{{order.pending}}</td>
       <td><a [routerLink]="['order-page', order.orderId]">Consulter</a></td>

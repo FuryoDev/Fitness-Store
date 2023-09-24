@@ -21,7 +21,7 @@
       <tr *ngFor="let product of products">
         <td>{{product.name}}</td>
         <td>{{product.sex}}</td>
-        <td>{{product.price}}</td>
+        <td>{{product.price.toFixed(2)}}</td>
         <td>{{product.subCategory.name}}</td>
         <td>{{product.subCategory.category.name}}</td>
         <td>

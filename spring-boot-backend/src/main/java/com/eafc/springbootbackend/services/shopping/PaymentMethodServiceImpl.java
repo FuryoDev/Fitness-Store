@@ -25,6 +25,11 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     }
 
     @Override
+    public PaymentMethod getPaymentMethodById(Long paymentMethodId) {
+        return this.paymentMethodRepository.findById(paymentMethodId).get();
+    }
+
+    @Override
     public Collection<PaymentMethod> getAllPaymentMethods() {
         return paymentMethodRepository.findAll();
     }

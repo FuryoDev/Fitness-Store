@@ -22,6 +22,11 @@ public class AdminPaymentMethodController {
         this.paymentMethodService = paymentMethodService;
     }
 
+    @GetMapping("getPaymentMethodById")
+    public PaymentMethod getPaymentMethodById(@RequestParam("paymentMethodId") Long paymentMethodId) {
+        return this.paymentMethodService.getPaymentMethodById(paymentMethodId);
+    }
+
     @GetMapping("getAllPaymentMethods")
     public Collection<PaymentMethod> getAllPaymentMethods() {
         return this.paymentMethodService.getAllPaymentMethods();

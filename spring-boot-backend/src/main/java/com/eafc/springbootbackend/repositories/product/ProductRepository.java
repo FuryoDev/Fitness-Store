@@ -22,10 +22,13 @@ public interface ProductRepository extends JpaRepository<ProductInfo, Long> {
     @Query("SELECT p FROM ProductInfo p WHERE p.subCategory.category = :category")
     Collection<ProductInfo> findProductsByCategory(Category category);
 
-    @Query("SELECT p from ProductInfo  p ORDER BY p.creationDate DESC")
+    @Query("SELECT p FROM ProductInfo p ORDER BY p.creationDate DESC")
     Collection<ProductInfo> findLatestProducts();
-//    @Query("SELECT p from ProductInfo  p WHERE p.discount IS NOT NULL")
-//    Collection<ProductInfo> findDiscountedProducts();
-//    @Query("SELECT p from ProductInfo  p WHERE p.discount = :discount")
-//    Collection<ProductInfo> findProductsByDiscount(Discount discount);
+
+    @Query("SELECT p FROM ProductInfo p WHERE p.productId IN (SELECT s.product.productId FROM Stock s WHERE s.itemsInStock > 0 GROUP BY s.product.productId ORDER BY SUM(s.itemsInStock) ASC)")
+    Collection<ProductInfo> findLowStockProduct();
+
+    @Query("SELECT d.productsInDiscount FROM Discount d WHERE d.isActive = true ORDER BY d.discountId DESC")
+    Collection<ProductInfo> findDiscountedProduct();
+
 }

@@ -11,33 +11,10 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class HomeComponent implements OnInit {
 
-  latestProducts: ProductInfo[] = [];
-  discountProducts: ProductInfo[] = [];
-  lowStockProducts: ProductInfo[] = [];
-
   constructor(private productService: ProductService,
               private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.retrieveProducts();
-  }
-
-  retrieveProducts() {
-    this.productService.getAllProducts().subscribe(
-      data => {
-        this.latestProducts = data;
-        this.discountProducts = data;
-        this.lowStockProducts = data;
-      }
-    );
-  }
-
-  private retrieveOtherProducts() {
-
-  }
-
-  private retrieveThridProducts() {
-
   }
 }

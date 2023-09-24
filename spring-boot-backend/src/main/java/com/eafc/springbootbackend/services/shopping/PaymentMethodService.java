@@ -8,7 +8,8 @@ import java.util.Collection;
 
 public interface PaymentMethodService {
 
-    Collection<PaymentMethod> getAllPaymentMethods();
+    PaymentMethod getPaymentMethodById(Long paymentMethodId);
 
+    Collection<PaymentMethod> getAllPaymentMethods();
     void savePaymentMethod(PaymentMethod paymentMethod, MultipartFile image) throws IOException;
 }

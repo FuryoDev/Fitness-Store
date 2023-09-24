@@ -22,6 +22,9 @@
         <td>
           {{paymentMethod.name}}
         </td>
+        <td>
+          <a [routerLink]="['/edit-payment-method', paymentMethod.paymentMethodId]">Edit</a>
+        </td>
       </tr>
       </tbody>
     </table>

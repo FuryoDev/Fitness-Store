@@ -50,7 +50,6 @@ export class CategoryFormComponent implements OnInit {
         //TODO: Make an alert that says ctegory saved + redirect to previous page
         console.log(data);
         this.router.navigate(['/admin-dashboard']).then(r => console.log(r));
-        window.location.reload();
       },
       error => {
         this.errorMessage = error.error.message;

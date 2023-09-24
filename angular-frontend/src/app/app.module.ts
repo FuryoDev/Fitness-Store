@@ -41,6 +41,9 @@ import { ToCardinalPipe } from './pipes/to-cardinal.pipe';
 import { SliderComponent } from './components/slider/slider.component';
 import { NextDirective } from './directives/next.directive';
 import { PreviousDirective } from './directives/previous.directive';
+import { AdminDiscountComponent } from './components/admin/admin-discount/admin-discount.component';
+import { DiscountFormComponent } from './components/admin/forms/discount-form/discount-form.component';
+import { DiscountToProductComponent } from './components/admin/admin-discount/discount-to-product/discount-to-product.component';
 
 
 @NgModule({
@@ -77,7 +80,10 @@ import { PreviousDirective } from './directives/previous.directive';
     ToCardinalPipe,
     SliderComponent,
     NextDirective,
-    PreviousDirective
+    PreviousDirective,
+    AdminDiscountComponent,
+    DiscountFormComponent,
+    DiscountToProductComponent
   ],
   imports: [
     BrowserModule,

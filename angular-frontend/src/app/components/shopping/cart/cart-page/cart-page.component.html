@@ -22,14 +22,14 @@
               <img [src]="item.productInfo.imageURL" alt="">
               <div class="cart-texts">
                 <p>{{item.productInfo.name}}</p>
-                <small>Price: {{item.productInfo.price}} €</small>
+                <small>Price: {{item.productInfo.price.toFixed(2)}} €</small>
                 <small>Size: {{item.relatedSizeAndStock.size}}</small>
                 <br>
                 <a href="">Remove</a>
               </div>
             </div>
           </td>
-          <td>{{item.totalPrice}} €</td>
+          <td>{{item.totalPrice.toFixed(2)}} €</td>
           <td>
             <button class="quantity-button decrement-button" (click)="changeQty(-1, i)">-</button>
             <span>{{item.quantity}}</span>
@@ -41,7 +41,7 @@
         </tr>
         <div class="subtotal-details">
           <h2>TOTAL: </h2>
-          <h3>{{cart.totalPrice}} €</h3>
+          <h3>{{cart.totalPrice.toFixed(2)}} €</h3>
           <h2>Delivery fees</h2>
           <h3>3.5€</h3>
           <button><a [routerLink]="['/checkout']">Checkout</a></button>

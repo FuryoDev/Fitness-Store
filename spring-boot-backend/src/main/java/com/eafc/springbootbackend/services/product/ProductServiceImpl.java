@@ -207,6 +207,16 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(productId);
     }
 
+    @Override
+    public Collection<ProductInfo> getLowStockProduct() {
+        return productRepository.findLowStockProduct();
+    }
+
+    @Override
+    public Collection<ProductInfo> getDiscountedProducts() {
+        return productRepository.findDiscountedProduct();
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {

@@ -32,4 +32,7 @@ public interface ProductService {
 
     void deleteProduct(Long productId);
 
+    Collection<ProductInfo> getLowStockProduct();
+
+    Collection<ProductInfo> getDiscountedProducts();
 }

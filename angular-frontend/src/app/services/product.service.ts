@@ -57,6 +57,18 @@ export class ProductService {
   deleteProduct(productId: number) {
     return this.httpClient.delete(this.baseUrl + 'admin/deleteProduct?productId='+ productId);
   }
+
+  getLatestProducts() {
+    return this.httpClient.get<ProductInfo[]>(this.baseUrl + 'getLatestProduct');
+  }
+
+  getOutOfStockProducts() {
+    return this.httpClient.get<ProductInfo[]>(this.baseUrl + 'getLowStockProduct' );
+  }
+
+  getDiscountedProducts() {
+    return this.httpClient.get<ProductInfo[]>(this.baseUrl + 'getDiscountedProducts');
+  }
 }
 
 interface GetResponse {

@@ -1,0 +1,9 @@
+<form  [formGroup]="discountForm" (ngSubmit)="saveDiscount()">
+  <label for="name">Name</label>
+  <input id="name" name="name" placeholder="Enter name" type="text" formControlName="name" [(ngModel)]="discount.discountName">
+  <label for="percentage">Name</label>
+  <input id="percentage" name="percentage" placeholder="Enter the percentage of the discount" type="number" formControlName="percentage" [(ngModel)]="discount.percentage">
+  <label for="isActive">Active</label>
+  <input id="isActive" name="isActive" type="checkbox" formControlName="name" [(ngModel)]="discount.isActive">
+  <button type="submit">Validate</button>
+</form>

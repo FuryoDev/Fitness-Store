@@ -41,7 +41,7 @@ export class CartService {
 
   retrieveCart(): Observable<Cart> {
     if (this.tokenStorageService.getUser() == null) {
-      console.log('we check something');
+      console.log(this.tokenStorageService.getUser());
       let cart =  new Cart();
       cart.totalPrice = 100;
       const cartSubject = new BehaviorSubject<Cart>(cart);

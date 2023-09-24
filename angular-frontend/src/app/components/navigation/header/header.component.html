@@ -8,13 +8,15 @@
       <a [routerLink]="['products-showcase', category.categoryId]" *ngFor="let category of categories"
          href="">{{category.name}}</a>
       <a *ngIf="isAdmin" [routerLink]="['/admin-dashboard']">Admin</a>
+      <a *ngIf="isAdmin" [routerLink]="['/admin-discount']">Admin Discounts</a>
       <a *ngIf="isAdmin" [routerLink]="['/admin-payment-method']">Admin PayMeth</a>
 
     </div>
   </nav>
   <div class="user-links">
-    <a [routerLink]="['/cart']">
+    <a [routerLink]="['/cart']" class="cart-icon">
       <fa-icon [icon]="faCart"></fa-icon>
+      <span class="cart-count" *ngIf="cartItems.length > 0 || null">{{numberOfProductsInCart}}</span>
     </a>
     <a *ngIf="!isLoggedIn"[routerLink]="['/login-page']">Login</a>
     <a *ngIf="isLoggedIn"[routerLink]="['/personal-page']">
