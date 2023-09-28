@@ -1,8 +1,10 @@
 package com.eafc.springbootbackend.services.product;
 
 import com.eafc.springbootbackend.entities.product.Discount;
+import com.eafc.springbootbackend.entities.product.ProductInfo;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface DiscountService {
@@ -15,4 +17,6 @@ public interface DiscountService {
     void saveDiscount(Discount discount);
 
     void deleteDiscount(Long discountId);
+
+    void assignProductsToDiscount(List<ProductInfo> products, Long discountId);
 }

@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <h1>Order Details</h1>
+  <h1 class="order-title">Order Details</h1>
   <div class="order-info">
     <div class="order-info-item">
       <span class="label">Date:</span>
@@ -15,16 +15,18 @@
     </div>
     <div class="order-info-item">
       <span class="label">Total Price:</span>
-      <span class="value">{{ order.total.toFixed(2) }}</span>
+      <span class="value">{{ order.total.toFixed(2) + " €"}}</span>
     </div>
   </div>
   <h2>Order Items</h2>
   <table class="order-items-table">
     <thead>
     <tr>
+      <th>Image</th>
       <th>Product</th>
-      <th>Product</th>
+      <th>Price</th>
       <th>Quantity</th>
+      <th>Size</th>
     </tr>
     </thead>
     <tbody>
@@ -33,7 +35,9 @@
         <img class="o-product-img" [src]="item.product.imageURL" alt="">
       </td>
       <td>{{ item.product.name}}</td>
+      <td>{{ item.purchasedPrice + " €"}}</td>
       <td>{{ item.quantity }}</td>
+      <td>{{ item.relatedStockAndSize.size }}</td>
     </tr>
     </tbody>
   </table>

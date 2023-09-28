@@ -9,6 +9,7 @@ import {StockService} from "../../../../services/prod-details/stock.service";
 import {UserService} from "../../../../services/authentication/user.service";
 import {TokenStorageService} from "../../../../services/authentication/token-storage.service";
 import {GuestCartService} from "../../../../services/shopping/cart/guest-cart.service";
+import {HeaderSharedService} from "../../../../services/shared/header-shared.service";
 
 @Component({
   selector: 'app-product-page',
@@ -26,6 +27,7 @@ export class ProductPageComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute,
+              private headerService: HeaderSharedService,
               private productService: ProductService,
               private stockService: StockService,
               private cartService: CartService,
@@ -72,6 +74,7 @@ export class ProductPageComponent implements OnInit {
     } else {
       this.cartService.addToCart(this.cartItem).subscribe()
     }
+    this.headerService.reloadHeader();
   }
 
   addToCartTwo(cartItem: CartItem) {
@@ -84,6 +87,7 @@ export class ProductPageComponent implements OnInit {
     } else {
       this.guestCartService.cartItems.push(cartItem);
     }
+    this.headerService.reloadHeader();
   }
 
   selectSize(size: any) {
@@ -119,5 +123,11 @@ export class ProductPageComponent implements OnInit {
         }
       }
     }
+  }
+  discountedPrice(originalPrice: number, discountPercentage?: number): number {
+    if (discountPercentage) {
+      return originalPrice * (1 - discountPercentage / 100);
+    }
+    return originalPrice;
   }
 }

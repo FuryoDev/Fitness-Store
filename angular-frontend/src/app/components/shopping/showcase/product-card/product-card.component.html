@@ -1,10 +1,14 @@
 <div class="s-product-card">
   <div class="s-product-card-img-wrapper">
     <img [src]="productInfo.imageURL" class="s-product-card-img">
+    <div *ngIf="productInfo.discount" class="discount-banner">{{ productInfo.discount.discountName }}</div>
   </div>
   <p class="s-product-card-title">{{productInfo.name}}</p>
   <hr>
   <p class="s-product-card-sex">{{productInfo.sex}}</p>
-  <p class="s-product-card-price">{{productInfo.price.toFixed(2)}} €</p>
+  <p class="s-product-card-price">
+    <span *ngIf="productInfo.discount" class="original-price">{{productInfo.price.toFixed(2)}} €</span>
+    {{ discountedPrice(productInfo.price, productInfo.discount ? productInfo.discount.percentage : undefined).toFixed(2) }} €
+  </p>
   <p class="s-product-card-button">Check Product</p>
 </div>

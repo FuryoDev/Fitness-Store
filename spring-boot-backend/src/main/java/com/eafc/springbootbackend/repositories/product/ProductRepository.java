@@ -28,7 +28,7 @@ public interface ProductRepository extends JpaRepository<ProductInfo, Long> {
     @Query("SELECT p FROM ProductInfo p WHERE p.productId IN (SELECT s.product.productId FROM Stock s WHERE s.itemsInStock > 0 GROUP BY s.product.productId ORDER BY SUM(s.itemsInStock) ASC)")
     Collection<ProductInfo> findLowStockProduct();
 
-    @Query("SELECT d.productsInDiscount FROM Discount d WHERE d.isActive = true ORDER BY d.discountId DESC")
-    Collection<ProductInfo> findDiscountedProduct();
+//    @Query("SELECT d.productsInDiscount FROM Discount d WHERE d.isActive = true ORDER BY d.discountId DESC")
+//    Collection<ProductInfo> findDiscountedProduct();
 
 }

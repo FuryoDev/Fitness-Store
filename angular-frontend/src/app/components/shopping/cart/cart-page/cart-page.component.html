@@ -25,7 +25,7 @@
                 <small>Price: {{item.productInfo.price.toFixed(2)}} €</small>
                 <small>Size: {{item.relatedSizeAndStock.size}}</small>
                 <br>
-                <a href="">Remove</a>
+                <button (click)="removeFromCart(item.cartItemId)">Remove</button>
               </div>
             </div>
           </td>

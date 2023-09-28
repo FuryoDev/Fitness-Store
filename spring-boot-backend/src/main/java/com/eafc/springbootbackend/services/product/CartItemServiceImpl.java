@@ -31,4 +31,9 @@ public class CartItemServiceImpl implements CartItemService {
     public void deleteCartItem(Long cartItemId) {
         cartItemRepository.deleteById(cartItemId);
     }
+
+    @Override
+    public void saveCartItem(CartItem cartItem) {
+        cartItemRepository.save(cartItem);
+    }
 }

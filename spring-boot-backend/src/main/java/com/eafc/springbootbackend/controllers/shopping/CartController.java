@@ -46,6 +46,15 @@ public class CartController {
         return cartService.findCartByCustomer(customer).get();
     }
 
+    @PutMapping("updateCartItem")
+    public void updateCartItem(@RequestBody CartItem cartItem){
+        cartItemService.saveCartItem(cartItem);
+    }
+
+    @DeleteMapping("deleteCartItem")
+    public void deleteCartItem(@RequestParam("cartItemId") Long cartItemId) {
+        cartItemService.deleteCartItem(cartItemId);
+    }
 
     //TODO: - Never send username from Frontend
     //      - Send the cart object or the CartItems Collections
@@ -53,5 +62,10 @@ public class CartController {
     @GetMapping("retrieveCartItems")
     public Collection<CartItem> retrieveUserCartItems(@RequestParam("cartId") Long cartId) {
         return cartItemService.findCartItemsByCart(cartId);
+    }
+
+    @PostMapping("saveCart")
+    public void saveCart(@RequestBody Cart cart) {
+        cartService.saveCart(cart);
     }
 }

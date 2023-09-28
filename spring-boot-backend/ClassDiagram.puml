@@ -11,6 +11,7 @@ class AccountInfo implements UserDetails {
     private String email;
     private Calendar birthday;
     private Set<Role> roles = new HashSet<>();
+    private ShippingAddress shippingAddress;
 }
 
 
@@ -19,7 +20,6 @@ class Discount {
     private String discountName;
     private int percentage;
     private boolean isActive;
-    private Collection<ProductInfo> productsInDiscount;
 }
 
 class ShippingAddress {
@@ -114,7 +114,7 @@ class Role {
 AccountInfo "1" --> "1" Cart
 AccountInfo "n" --> "n" Role
 
-Discount "1" --> "n" ProductInfo
+Discount "n" --> "1" ProductInfo
 
 ProductInfo "n" --> "1" SubCategory
 Stock "n" --> "1" ProductInfo

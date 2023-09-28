@@ -1,7 +1,7 @@
-<p>admin-discount works!</p>
-<button><a [routerLink]="['/create-discount']">Create</a></button>
-<table>
-  <thead>
+<div class="wrapper">
+  <button><a [routerLink]="['/create-discount']">Create</a></button>
+  <table>
+    <thead>
     <tr>
       <th>Name</th>
       <th>Percentage</th>
@@ -10,18 +10,19 @@
       <th>Action</th>
       <th>Products</th>
     </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let discount of discounts">
-    <td>{{discount.discountName}}</td>
-    <td>{{discount.percentage}}</td>
-<!--    <td>{{discount.discountedProducts.length}}</td>-->
-    <td>1 mirrion</td>
-    <td>{{discount.isActive}}</td>
-    <td><button (click)="deleteDiscount(discount.discountId)">Delete</button></td>
-    <td>
-      <a [routerLink]="['/discount-products']">Assign Products Link</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+    <tr *ngFor="let discount of discounts">
+      <td>{{discount.discountName}}</td>
+      <td>{{discount.percentage}}</td>
+      <!--    <td>{{discount.discountedProducts.length}}</td>-->
+      <td>1 mirrion</td>
+      <td>{{discount.isActive}}</td>
+      <td><button (click)="deleteDiscount(discount.discountId)">Delete</button></td>
+      <td>
+        <a [routerLink]="['/discount-products', discount.discountId]">Assign Products Link</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

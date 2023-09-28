@@ -21,7 +21,4 @@ public class Discount {
     @NotNull
     private int percentage;
     private boolean isActive;
-    @OneToMany
-    Collection<ProductInfo> productsInDiscount;
-
 }

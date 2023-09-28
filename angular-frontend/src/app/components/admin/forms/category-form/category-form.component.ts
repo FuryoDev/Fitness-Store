@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CategoryService} from "../../../../services/prod-details/category/category.service";
 import {Category} from "../../../../common/prod-details/category";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {HeaderSharedService} from "../../../../services/shared/header-shared.service";
 
 @Component({
   selector: 'app-category-form',
@@ -23,6 +24,7 @@ export class CategoryFormComponent implements OnInit {
   errorMessage: string | undefined;
 
   constructor(private router: Router,
+              private headerService: HeaderSharedService,
               private route: ActivatedRoute,
               private categoryService: CategoryService) { }
 
@@ -50,6 +52,7 @@ export class CategoryFormComponent implements OnInit {
         //TODO: Make an alert that says ctegory saved + redirect to previous page
         console.log(data);
         this.router.navigate(['/admin-dashboard']).then(r => console.log(r));
+        this.headerService.reloadHeader();
       },
       error => {
         this.errorMessage = error.error.message;

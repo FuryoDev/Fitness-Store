@@ -50,4 +50,12 @@ export class CartService {
 
     return this.httpClient.get<Cart>(this.baseUrl + 'retrieveCart?username=' + this.tokenStorageService.getUser().username);
   }
+
+  updateCartItem(cartItem: CartItem) {
+    return this. httpClient.put(this.baseUrl + 'updateCartItem', cartItem);
+  }
+
+  deleteCartItem(cartItemId: number) {
+    return this.httpClient.delete(this.baseUrl + 'deleteCartItem?cartItemId=' + cartItemId);
+  }
 }

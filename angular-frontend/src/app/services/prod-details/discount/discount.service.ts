@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Discount} from "../../../common/prod-details/discount";
+import {ProductInfo} from "../../../common/shopping/product-info";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class DiscountService {
   }
 
   getDiscountById(discountId: number) {
-    return this.httpClient.get<Discount>(this.baseUrl + 'admin/getDiscountById?id=' + discountId);
+    return this.httpClient.get<Discount>(this.baseUrl + 'admin/getDiscountById?discId=' + discountId);
   }
 
   retrieveDiscounts() {
@@ -35,5 +36,10 @@ export class DiscountService {
 
   deleteDiscount(discountId: number) {
     return this.httpClient.delete(this.baseUrl + 'admin/deleteDiscount?discId=' + discountId);
+  }
+
+  assignProductsToDiscount(products: ProductInfo[], discountId: number) {
+    console.log('JJJJJJJJ')
+    return this.httpClient.post(this.baseUrl + 'admin/assignProductToDiscount?discountId=' + discountId, products);
   }
 }

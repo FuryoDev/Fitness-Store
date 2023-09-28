@@ -214,7 +214,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Collection<ProductInfo> getDiscountedProducts() {
-        return productRepository.findDiscountedProduct();
+//        return productRepository.findDiscountedProduct();
+        return new ArrayList<>();
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

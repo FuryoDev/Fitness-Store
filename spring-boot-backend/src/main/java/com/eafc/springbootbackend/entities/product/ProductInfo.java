@@ -48,4 +48,7 @@ public class ProductInfo implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private SubCategory subCategory;
 
+    @ManyToOne
+    private Discount discount;
+
 }

@@ -16,4 +16,12 @@ export class ProductCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  discountedPrice(originalPrice: number, discountPercentage?: number): number {
+    if (discountPercentage) {
+      return originalPrice * (1 - discountPercentage / 100);
+    }
+    return originalPrice;
+  }
+
+
 }

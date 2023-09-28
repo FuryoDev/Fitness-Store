@@ -6,11 +6,13 @@
         <div class="slider-wrap">
           <div class="slider-main">
             <div class="item" *ngFor="let product of products">
-              <img [src]="product.imageURL" alt="{{product.name}}" class="product-image">
-              <div class="text">
-                <div class="product-name">{{product.name}}</div>
-                <div class="product-price">{{product.price.toFixed(2) | currency}}</div>
-              </div>
+              <a [routerLink]="['/product-page', product.productId]">
+                <img [src]="product.imageURL" alt="{{product.name}}" class="product-image">
+                <div class="text">
+                  <div class="product-name">{{product.name}}</div>
+                  <div class="product-price">{{product.price.toFixed(2) | currency}}</div>
+                </div>
+              </a>
             </div>
           </div>
           <div class="button-area">

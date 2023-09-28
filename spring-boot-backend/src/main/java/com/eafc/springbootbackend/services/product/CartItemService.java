@@ -10,4 +10,6 @@ public interface CartItemService {
     Collection<CartItem> findCartItemsByCart(Long cartId);
 
     void deleteCartItem(Long cartItemId);
+
+    void saveCartItem(CartItem cartItem);
 }

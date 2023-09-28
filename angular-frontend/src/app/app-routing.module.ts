@@ -90,7 +90,7 @@ const routes: Routes = [
     component: AdminDiscountComponent
   },
   {
-    path: 'discount-products',
+    path: 'discount-products/:id',
     component: DiscountToProductComponent
   },
   {

@@ -5,6 +5,9 @@ import {SubCategory} from "../../../../common/prod-details/sub-category";
 import {Category} from "../../../../common/prod-details/category";
 import {SubCategoryService} from "../../../../services/prod-details/subcategory/sub-category.service";
 import {CategoryService} from "../../../../services/prod-details/category/category.service";
+import {ActivatedRoute} from "@angular/router";
+import {DiscountService} from "../../../../services/prod-details/discount/discount.service";
+import {Discount} from "../../../../common/prod-details/discount";
 
 @Component({
   selector: 'app-discount-to-product',
@@ -13,6 +16,7 @@ import {CategoryService} from "../../../../services/prod-details/category/catego
 })
 export class DiscountToProductComponent implements OnInit {
 
+  discount: Discount = new Discount()
   products: ProductInfo[] = [];
 
   searchTerm: string = '';
@@ -21,13 +25,20 @@ export class DiscountToProductComponent implements OnInit {
   categories: Category[] = []; // Votre liste de catégories
   subCategories: SubCategory[] = []; // Votre liste de sous-catégories
   filteredProducts: ProductInfo[] = [];
+  selectedProducts: ProductInfo[] = [];
+
 
   constructor(private productService: ProductService,
+              private discountService: DiscountService,
               private subCategoryService: SubCategoryService,
+              private route: ActivatedRoute,
               private categoryService: CategoryService) {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(() =>  {
+      this.initDiscountPage();
+    })
     this.productService.getAllProducts().subscribe(
       data => {
         this.products = data;
@@ -56,4 +67,38 @@ export class DiscountToProductComponent implements OnInit {
     });
   }
 
+  toggleProductSelection(product: ProductInfo) {
+    const index = this.selectedProducts.findIndex(p => p.productId === product.productId);
+    if (index !== -1) {
+      this.selectedProducts.splice(index, 1);
+    } else {
+      this.selectedProducts.push(product);
+    }
+  }
+
+  isProductSelected(productId: number): boolean {
+    return this.selectedProducts.some(p => p.productId === productId);
+  }
+
+  assignProductsToDiscount() {
+    if(this.selectedProducts.length > 0) {
+      this.discountService.assignProductsToDiscount(this.selectedProducts, this.discount.discountId).subscribe(
+        response => {
+          console.log(response);
+        }
+      );
+    }
+  }
+
+  initDiscountPage() {
+    const hasDiscountId: boolean = this.route.snapshot.paramMap.has('id')
+    if(hasDiscountId) {
+      const discountId: number = +this.route.snapshot.paramMap.get('id')!;
+      this.discountService.getDiscountById(discountId).subscribe(
+        data => {
+          this.discount = data;
+        }
+      )
+    }
+  }
 }

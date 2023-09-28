@@ -20,4 +20,18 @@ export class GuestCartService {
   retrieveCartItems() {
     return this.cartItems;
   }
+
+  updateCartItem(cartItem: CartItem) {
+    const index = this.cartItems.findIndex(item => item.cartItemId === cartItem.cartItemId);
+    if (index !== -1) {
+      this.cartItems[index] = cartItem;
+    }
+  }
+
+  deleteCartItem(cartItemId: number) {
+    const index = this.cartItems.findIndex(item => item.cartItemId === cartItemId);
+    if (index !== -1) {
+      this.cartItems.splice(index, 1);
+    }
+  }
 }

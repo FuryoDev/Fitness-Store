@@ -3,9 +3,11 @@
     <div class="details-container">
       <h1 class="product-name">{{productInfo.name}}</h1>
       <p class="product-price">
-        200 €
+        <span *ngIf="productInfo.discount" class="original-price">{{productInfo.price.toFixed(2)}} €</span>
+        {{ discountedPrice(productInfo.price, productInfo.discount ? productInfo.discount.percentage : undefined).toFixed(2) }} €
       </p>
       <hr class="horizontal-line">
+      <p class="product-description">{{productInfo.description}}</p>
       <p class="product-size">size</p>
       <div class="product-buttons">
         <div class="quantity-buttons">
@@ -20,13 +22,10 @@
       </div>
       <p style="color: red">{{errorMessage}}</p>
       <button class="add-to-cart-btn" (click)="addToCart()" [disabled]="!isSizeSelected()">Add to cart</button>
-      <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad adipisci
-        aliquid atque autem blanditiis consequuntur delectus eius explicabo impedit inventore ipsa, maiores molestiae,
-        mollitia numquam optio perspiciatis, tempora ut.</p>
     </div>
     <div class="image-container">
       <img [src]="productInfo.imageURL" class="product-image">
+      <div *ngIf="productInfo.discount" class="discount-banner"><h2>{{ productInfo.discount.discountName }}</h2></div>
     </div>
   </div>
 </div>
-

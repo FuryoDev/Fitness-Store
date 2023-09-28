@@ -1,5 +1,4 @@
 <div class="wrapper">
-
   <!-- Zone de recherche -->
   <div class="search-section">
     <input type="text" [(ngModel)]="searchTerm" placeholder="Search by product name" (keyup)="filterProducts()">
@@ -23,31 +22,44 @@
         </label>
       </div>
     </div>
-
-
-    <div class="" *ngIf="products.length == 0">
-    <p>Nothing to show</p>
   </div>
-  <div class="" *ngIf="products.length > 0">
-    <table>
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>Sex</th>
-        <th>Price</th>
-        <th>Sub-category</th>
-        <th>Category</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let product of filteredProducts">
-        <td>{{product.name}}</td>
-        <td>{{product.sex}}</td>
-        <td>{{product.price.toFixed(2)}}</td>
-        <td>{{product.subCategory.name}}</td>
-        <td>{{product.subCategory.category.name}}</td>
-      </tr>
-      </tbody>
-    </table>
+
+  <div class="products-section">
+    <div *ngIf="filteredProducts.length == 0">
+      <p>Nothing to show</p>
+    </div>
+    <div *ngIf="filteredProducts.length > 0">
+      <!-- ... autres éléments ... -->
+
+      <table>
+        <thead>
+        <tr>
+          <th>Select</th>
+          <th>Name</th>
+          <th>Sex</th>
+          <th>Price</th>
+          <th>Sub-category</th>
+          <th>Category</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of filteredProducts">
+          <td>
+            <input type="checkbox"
+                   [checked]="isProductSelected(product.productId)"
+                   (change)="toggleProductSelection(product)">
+          </td>
+          <td>{{product.name}}</td>
+          <td>{{product.sex}}</td>
+          <td>{{product.price.toFixed(2)}}</td>
+          <td>{{product.subCategory.name}}</td>
+          <td>{{product.subCategory.category.name}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    <button class="add-to-cart-btn" (click)="assignProductsToDiscount()">Assign Selected Products to DISCOUNTNAME</button>
+
+    </div>
   </div>
 </div>
