@@ -1,0 +1,26 @@
+# Angular and Node.js artifacts
+node_modules/
+dist/
+*.log
+
+# Editor files
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+*.sublime*
+*.idea/
+.vscode/
+*.code-workspace
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Angular environment files
+src/environments/*.ts
+!src/environments/environment.ts
+
+# Ignore all directories inside assets/images
+assets/images/*/
